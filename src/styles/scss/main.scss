@@ -1,0 +1,19 @@
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr,
+th,
+td {
+  border: 1px solid #808080;
+}
+
+tbody {
+  text-align: center;
+}
