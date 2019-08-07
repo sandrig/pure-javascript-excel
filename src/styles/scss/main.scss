@@ -1,7 +1,26 @@
-body {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.main {
+  padding: 0 20px;
+}
+
+.menu {
+  margin-bottom: 20px;
+  border: 1px solid #cccccc;
+  width: 400px;
+  height: 50px;
+}
+
+.field {
+  margin-bottom: 20px;
 }
 
 table {
@@ -9,11 +28,6 @@ table {
 }
 
 tr,
-th,
 td {
   border: 1px solid #808080;
-}
-
-tbody {
-  text-align: center;
 }

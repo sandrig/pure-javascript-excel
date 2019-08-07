@@ -1,22 +1,21 @@
 export const createTable = () => {
-  const app = document.getElementById('app');
+  const column = 10;
+  const row = 20;
+  const el = document.querySelector('.table');
   const table = document.createElement('table');
-  const tableBody = document.createElement('tbody');
-  const columns = 10;
-  const rows = 20;
 
-  table.appendChild(tableBody);
-
-  for (let i = 0; i < rows; i++) {
+  for (let i = 0; i < row; i++) {
     const tr = document.createElement('tr');
-    tableBody.appendChild(tr);
 
-    for (let j = 0; j < columns; j++) {
+    for (let j = 0; j < column; j++) {
       const td = document.createElement('td');
-      td.appendChild(document.createTextNode('Cell ' + i + ',' + j));
+      const input = document.createElement('input');
+      td.appendChild(input);
       tr.appendChild(td);
     }
+
+    table.appendChild(tr);
   }
 
-  app.appendChild(table);
+  el.appendChild(table);
 };
