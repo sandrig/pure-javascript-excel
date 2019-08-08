@@ -1,4 +1,4 @@
 import '@scss/main.scss';
-import { createTable } from './js/createTable';
+import { createTable } from './components';
 
-createTable();
+createTable(20, 10);
