@@ -1,7 +1,5 @@
 const headers = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-const table = document.querySelector('table');
-const row = 20;
-const column = 10;
+const $table = document.querySelector('table');
 
 const generateTableHead = (table, data) => {
   let thead = table.createTHead();
@@ -14,7 +12,7 @@ const generateTableHead = (table, data) => {
   }
 };
 
-const generateTable = table => {
+const generateTable = (table, row, column) => {
   for (let i = 0; i < row; i++) {
     let tr = document.createElement('tr');
 
@@ -29,7 +27,7 @@ const generateTable = table => {
   }
 };
 
-export const createTable = () => {
-  generateTable(table);
-  generateTableHead(table, headers);
+export const createTable = (row, column) => {
+  generateTable($table, row, column);
+  generateTableHead($table, headers);
 };
