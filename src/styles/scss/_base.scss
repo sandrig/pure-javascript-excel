@@ -1,0 +1,45 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.main {
+  padding: 0 20px;
+}
+
+.menu {
+  margin-bottom: 20px;
+  border: 1px solid #cccccc;
+  width: 400px;
+  height: 50px;
+}
+
+.field {
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tr,
+th,
+td {
+  border: 1px solid #808080;
+}
+
+.ceil {
+  width: 100%;
+}
+
+.count {
+  width: 40px;
+  text-align: center;
+}
+
