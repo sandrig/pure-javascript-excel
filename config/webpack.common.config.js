@@ -55,4 +55,8 @@ module.exports = {
       filename: 'style.[chunkhash].css',
     }),
   ],
+
+  devServer: {
+    open: true,
+  }
 };
