@@ -122,8 +122,8 @@ const resizableGrid = table => {
   }
 };
 
-export const createTable = (row, column) => {
-  generateTable($table, row, column);
+export const createTable = (rowsCount, columnsCount) => {
+  generateTable($table, rowsCount, columnsCount);
   generateTableHead($table, headers);
   resizableGrid($table);
 };
