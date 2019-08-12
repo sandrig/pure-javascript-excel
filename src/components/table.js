@@ -2,26 +2,26 @@ const headers = ["№", "A", "B", "C", "D", "E", "F", "G", "H", "I"];
 const $table = document.querySelector("table");
 
 const generateTableHead = (table, data) => {
-  let thead = table.createTHead();
-  let row = thead.insertRow();
+  const thead = table.createTHead();
+  const row = thead.insertRow();
 
   for (let key of data) {
-    let th = document.createElement("th");
-    let text = document.createTextNode(key);
+    const th = document.createElement("th");
+    const text = document.createTextNode(key);
     th.appendChild(text);
     row.appendChild(th);
   }
 };
 
 const generateTable = (table, row, column) => {
-  let tbody = table.createTBody();
+  const tbody = table.createTBody();
 
   for (let i = 0; i < row; i++) {
-    let tr = document.createElement("tr");
+    const tr = document.createElement("tr");
 
     for (let j = 0; j < column; j++) {
-      let td = document.createElement("td");
-      let input = document.createElement("input");
+      const td = document.createElement("td");
+      const input = document.createElement("input");
 
       if (j === 0) {
         td.classList.add("count");
@@ -39,7 +39,7 @@ const generateTable = (table, row, column) => {
 };
 
 const resizableGrid = table => {
-  let row = table.getElementsByTagName("tr")[0],
+  const row = table.getElementsByTagName("tr")[0],
       cols = row ? row.children : undefined;
   if (!cols) return;
 
@@ -48,7 +48,7 @@ const resizableGrid = table => {
   let tableHeight = table.offsetHeight;
 
   for (let i = 0; i < cols.length; i++) {
-    let div = createDiv(tableHeight);
+    const div = createDiv(tableHeight);
     cols[i].appendChild(div);
     cols[i].style.position = "relative";
     setListeners(div);
@@ -96,7 +96,7 @@ const resizableGrid = table => {
   }
 
   function createDiv(height) {
-    let div = document.createElement("div");
+    const div = document.createElement("div");
     div.style.top = 0;
     div.style.right = 0;
     div.style.width = "4px";
