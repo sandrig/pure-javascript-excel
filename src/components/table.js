@@ -108,7 +108,7 @@ const resizableGrid = table => {
   }
 
   function paddingDiff(col) {
-    if (getStyleVal(col, "box-sizing") == "border-box") {
+    if (getStyleVal(col, "box-sizing") === "border-box") {
       return 0;
     }
 
