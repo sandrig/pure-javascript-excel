@@ -1,0 +1,13 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb/base",
+  "rules": {
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+    "import/no-unresolved": "off",
+    "no-plusplus": [2, { "allowForLoopAfterthoughts": true }],
+    "no-restricted-syntax": 0
+  },
+  "env": {
+    "browser": true
+  }
+}
