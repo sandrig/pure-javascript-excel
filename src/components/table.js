@@ -56,7 +56,7 @@ export const resizableGrid = (table) => {
 
     const paddingLeft = getStyleVal(col, 'padding-left');
     const paddingRight = getStyleVal(col, 'padding-right');
-    return parseInt(paddingLeft,10) + parseInt(paddingRight,10);
+    return parseInt(paddingLeft, 10) + parseInt(paddingRight, 10);
   }
 
   function setListeners(div) {
