@@ -1,15 +1,23 @@
-const headers = ['№', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
 const $table = document.querySelector('table');
 
-const generateTableHead = (table, data) => {
+const generateTableHead = (table, columnsCount) => {
   const thead = table.createTHead();
   const row = thead.insertRow();
 
-  for (const key of data) {
+  for (let i = 0; i < columnsCount; i++) {
     const th = document.createElement('th');
-    const text = document.createTextNode(key);
-    th.appendChild(text);
-    row.appendChild(th);
+    const textFirstColumn = document.createTextNode('№');
+    const textOtherColumn = document.createTextNode(
+      `${String.fromCharCode('A'.charCodeAt(0) + i - 1)}`,
+    );
+
+    if (i === 0) {
+      th.appendChild(textFirstColumn);
+      row.appendChild(th);
+    } else {
+      th.appendChild(textOtherColumn);
+      row.appendChild(th);
+    }
   }
 };
 
@@ -126,6 +134,6 @@ export const resizableGrid = (table) => {
 
 export const createTable = (rowsCount, columnsCount) => {
   generateTable($table, rowsCount, columnsCount);
-  generateTableHead($table, headers);
+  generateTableHead($table, columnsCount);
   resizableGrid($table);
 };
