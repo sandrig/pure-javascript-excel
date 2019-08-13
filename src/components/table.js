@@ -1,34 +1,42 @@
-const headers = ["№", "A", "B", "C", "D", "E", "F", "G", "H", "I"];
-const $table = document.querySelector("table");
+const $table = document.querySelector('table');
 
-const generateTableHead = (table, data) => {
-  let thead = table.createTHead();
-  let row = thead.insertRow();
+const generateTableHead = (table, columnsCount) => {
+  const thead = table.createTHead();
+  const row = thead.insertRow();
 
-  for (let key of data) {
-    let th = document.createElement("th");
-    let text = document.createTextNode(key);
-    th.appendChild(text);
-    row.appendChild(th);
+  for (let i = 0; i < columnsCount; i++) {
+    const th = document.createElement('th');
+    const textFirstColumn = document.createTextNode('№');
+    const textOtherColumn = document.createTextNode(
+      `${String.fromCharCode('A'.charCodeAt(0) + i - 1)}`,
+    );
+
+    if (i === 0) {
+      th.appendChild(textFirstColumn);
+      row.appendChild(th);
+    } else {
+      th.appendChild(textOtherColumn);
+      row.appendChild(th);
+    }
   }
 };
 
 const generateTable = (table, row, column) => {
-  let tbody = table.createTBody();
+  const tbody = table.createTBody();
 
   for (let i = 0; i < row; i++) {
-    let tr = document.createElement("tr");
+    const tr = document.createElement('tr');
 
     for (let j = 0; j < column; j++) {
-      let td = document.createElement("td");
-      let input = document.createElement("input");
+      const td = document.createElement('td');
+      const input = document.createElement('input');
 
       if (j === 0) {
-        td.classList.add("count");
+        td.classList.add('count');
         td.innerText = i + 1;
         tr.appendChild(td);
       } else {
-        input.classList.add("ceil");
+        input.classList.add('ceil');
         td.appendChild(input);
         tr.appendChild(td);
       }
@@ -38,55 +46,64 @@ const generateTable = (table, row, column) => {
   }
 };
 
-const resizableGrid = table => {
-  let row = table.getElementsByTagName("tr")[0],
-      cols = row ? row.children : undefined;
+export const resizableGrid = (table) => {
+  const row = table.getElementsByTagName('tr')[0];
+  const cols = row ? row.children : undefined;
   if (!cols) return;
 
-  table.style.overflow = "hidden";
+  const tableHeight = table.offsetHeight;
 
-  let tableHeight = table.offsetHeight;
+  function getStyleVal(elem, css) {
+    return window.getComputedStyle(elem, null).getPropertyValue(css);
+  }
 
-  for (let i = 0; i < cols.length; i++) {
-    let div = createDiv(tableHeight);
-    cols[i].appendChild(div);
-    cols[i].style.position = "relative";
-    setListeners(div);
+  function paddingDiff(col) {
+    if (getStyleVal(col, 'box-sizing') === 'border-box') {
+      return 0;
+    }
+
+    const paddingLeft = getStyleVal(col, 'padding-left');
+    const paddingRight = getStyleVal(col, 'padding-right');
+    return parseInt(paddingLeft, 10) + parseInt(paddingRight, 10);
   }
 
   function setListeners(div) {
-    let pageX, curCol, nxtCol, curColWidth, nxtColWidth;
+    let pageX;
+    let curCol;
+    let nxtCol;
+    let curColWidth;
+    let nxtColWidth;
 
-    div.addEventListener("mousedown", function(e) {
+    div.addEventListener('mousedown', (e) => {
       curCol = e.target.parentElement;
       nxtCol = curCol.nextElementSibling;
       pageX = e.pageX;
 
-      let padding = paddingDiff(curCol);
+      const padding = paddingDiff(curCol);
 
       curColWidth = curCol.offsetWidth - padding;
       if (nxtCol) nxtColWidth = nxtCol.offsetWidth - padding;
     });
 
-    div.addEventListener("mouseover", function(e) {
-      e.target.style.borderRight = "2px solid #0000ff";
+    div.addEventListener('mouseover', (e) => {
+      e.target.style.borderRight = '2px solid #0000ff';
     });
 
-    div.addEventListener("mouseout", function(e) {
-      e.target.style.borderRight = "";
+    div.addEventListener('mouseout', (e) => {
+      e.target.style.borderRight = '';
     });
 
-    document.addEventListener("mousemove", function(e) {
+    document.addEventListener('mousemove', (e) => {
       if (curCol) {
-        let diffX = e.pageX - pageX;
+        const diffX = e.pageX - pageX;
 
-        if (nxtCol) nxtCol.style.width = nxtColWidth - diffX + "px";
+        if (nxtCol) nxtCol.style.width = `${nxtColWidth - diffX}px`;
 
-        curCol.style.width = curColWidth + diffX + "px";
+        curCol.style.width = `${curColWidth + diffX}px`;
       }
     });
 
-    document.addEventListener("mouseup", function(e) {
+    document.addEventListener('mouseup', () => {
       curCol = null;
       nxtCol = null;
       pageX = null;
@@ -96,34 +113,27 @@ const resizableGrid = table => {
   }
 
   function createDiv(height) {
-    let div = document.createElement("div");
-    div.style.top = 0;
-    div.style.right = 0;
-    div.style.width = "4px";
-    div.style.position = "absolute";
-    div.style.cursor = "col-resize";
-    div.style.userSelect = "none";
-    div.style.height = height + "px";
+    const div = document.createElement('div');
+    div.style.top = '0px';
+    div.style.right = '0px';
+    div.style.width = '4px';
+    div.style.position = 'absolute';
+    div.style.cursor = 'col-resize';
+    div.style.userSelect = 'none';
+    div.style.height = `${height}px`;
     return div;
   }
 
-  function paddingDiff(col) {
-    if (getStyleVal(col, "box-sizing") == "border-box") {
-      return 0;
-    }
-
-    let paddingLeft = getStyleVal(col, "padding-left");
-    let paddingRight = getStyleVal(col, "padding-right");
-    return parseInt(paddingLeft) + parseInt(paddingRight);
-  }
-
-  function getStyleVal(elem, css) {
-    return window.getComputedStyle(elem, null).getPropertyValue(css);
+  for (let i = 0; i < cols.length; i++) {
+    const div = createDiv(tableHeight);
+    cols[i].appendChild(div);
+    cols[i].style.position = 'relative';
+    setListeners(div);
   }
 };
 
-export const createTable = (row, column) => {
-  generateTable($table, row, column);
-  generateTableHead($table, headers);
+export const createTable = (rowsCount, columnsCount) => {
+  generateTable($table, rowsCount, columnsCount);
+  generateTableHead($table, columnsCount);
   resizableGrid($table);
 };
