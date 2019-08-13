@@ -6,7 +6,9 @@
   "scripts": {
     "build:dev": "cross-env NODE_ENV=development webpack --mode development",
     "build:prod": "cross-env NODE_ENV=production webpack --mode production",
-    "start": "webpack-dev-server --mode development"
+    "start": "webpack-dev-server --mode development",
+    "lint": "eslint --debug src/",
+    "lint:write": "eslint --debug src/ --fix"
   },
   "author": "Andrey Savelyev <sandrig.dev@gmail.com> (https://sandrig.com)",
   "license": "MIT",
