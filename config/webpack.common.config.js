@@ -13,18 +13,19 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
+        test: /\.(js)$/,
+        include: path.resolve(__dirname, '../src'),
+        enforce: 'pre',
         loader: 'eslint-loader',
+        options: {
+          emitWarning: true,
+        },
       },
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
         },
       },
       {
