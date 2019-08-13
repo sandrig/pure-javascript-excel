@@ -1,6 +1,6 @@
 const $table = document.querySelector('table');
 
-const generateTableHead = (table, columnsCount) => {
+function generateTableHead(table, columnsCount) {
   const thead = table.createTHead();
   const row = thead.insertRow();
 
@@ -19,9 +19,9 @@ const generateTableHead = (table, columnsCount) => {
       row.appendChild(th);
     }
   }
-};
+}
 
-const generateTable = (table, row, column) => {
+function generateTable(table, row, column) {
   const tbody = table.createTBody();
 
   for (let i = 0; i < row; i++) {
@@ -44,9 +44,9 @@ const generateTable = (table, row, column) => {
 
     tbody.appendChild(tr);
   }
-};
+}
 
-export const resizableGrid = (table) => {
+export function resizableGrid(table) {
   const row = table.getElementsByTagName('tr')[0];
   const cols = row ? row.children : undefined;
   if (!cols) return;
@@ -130,10 +130,10 @@ export const resizableGrid = (table) => {
     cols[i].style.position = 'relative';
     setListeners(div);
   }
-};
+}
 
-export const createTable = (rowsCount, columnsCount) => {
+export function createTable(rowsCount, columnsCount) {
   generateTable($table, rowsCount, columnsCount);
   generateTableHead($table, columnsCount);
   resizableGrid($table);
-};
+}
