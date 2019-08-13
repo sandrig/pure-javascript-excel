@@ -8,7 +8,8 @@
     "build:prod": "cross-env NODE_ENV=production webpack --mode production",
     "start": "webpack-dev-server --mode development",
     "lint": "eslint --debug src/",
-    "lint:write": "eslint --debug src/ --fix"
+    "lint:write": "eslint --debug src/ --fix",
+    "prettier": "prettier --write src/**/*.js"
   },
   "author": "Andrey Savelyev <sandrig.dev@gmail.com> (https://sandrig.com)",
   "license": "MIT",
@@ -24,10 +25,12 @@
     "eslint-config-airbnb": "^18.0.0",
     "eslint-loader": "^2.2.1",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.0",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.12.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "prettier": "^1.18.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^1.0.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
