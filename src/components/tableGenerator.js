@@ -1,8 +1,7 @@
 import { tableResizing } from '@/components/tableResizing';
 
-const $table = document.querySelector('table');
-
-function generateTableHead(table, columnsCount) {
+function generateTableHead(selector, columnsCount) {
+  const table = document.querySelector(selector);
   const thead = table.createTHead();
   const row = thead.insertRow();
 
@@ -23,7 +22,8 @@ function generateTableHead(table, columnsCount) {
   }
 }
 
-function generateTable(table, row, column) {
+function generateTable(selector, row, column) {
+  const table = document.querySelector(selector);
   const tbody = table.createTBody();
 
   for (let i = 0; i < row; i++) {
@@ -48,8 +48,8 @@ function generateTable(table, row, column) {
   }
 }
 
-export function createTable(rowsCount, columnsCount) {
-  generateTable($table, rowsCount, columnsCount);
-  generateTableHead($table, columnsCount);
-  tableResizing($table);
+export function createTable(selector, rowsCount, columnsCount) {
+  generateTable(selector, rowsCount, columnsCount);
+  generateTableHead(selector, columnsCount);
+  tableResizing(selector);
 }

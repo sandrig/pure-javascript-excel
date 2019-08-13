@@ -1,4 +1,5 @@
-export function tableResizing(table) {
+export function tableResizing(selector) {
+  const table = document.querySelector(selector);
   const row = table.getElementsByTagName('tr')[0];
   const cols = row ? row.children : undefined;
   if (!cols) return;
