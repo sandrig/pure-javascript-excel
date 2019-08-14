@@ -1,9 +1,9 @@
-import { tableResizing } from '@/components/tableResizing';
+import { initResizing } from '@/components/initResizing';
 
-function generateTableHead(selector, columnsCount) {
-  const table = document.querySelector(selector);
+function generateTableHead(table, columnsCount) {
   const thead = table.createTHead();
   const row = thead.insertRow();
+  row.id = 'row-head';
 
   for (let i = 0; i < columnsCount; i++) {
     const th = document.createElement('th');
@@ -19,11 +19,15 @@ function generateTableHead(selector, columnsCount) {
       th.appendChild(textOtherColumn);
       row.appendChild(th);
     }
+
+    th.insertAdjacentHTML(
+      'beforeend',
+      "<div class='separator' data-resize='column'></div>",
+    );
   }
 }
 
-function generateTable(selector, row, column) {
-  const table = document.querySelector(selector);
+function generateTable(table, row, column) {
   const tbody = table.createTBody();
 
   for (let i = 0; i < row; i++) {
@@ -31,15 +35,15 @@ function generateTable(selector, row, column) {
 
     for (let j = 0; j < column; j++) {
       const td = document.createElement('td');
-      const input = document.createElement('input');
+      const editableDiv = document.createElement('div');
 
       if (j === 0) {
         td.classList.add('count');
         td.innerText = i + 1;
         tr.appendChild(td);
       } else {
-        input.classList.add('ceil');
-        td.appendChild(input);
+        editableDiv.setAttribute('contenteditable', 'true');
+        td.appendChild(editableDiv);
         tr.appendChild(td);
       }
     }
@@ -49,7 +53,8 @@ function generateTable(selector, row, column) {
 }
 
 export function createTable(selector, rowsCount, columnsCount) {
-  generateTable(selector, rowsCount, columnsCount);
-  generateTableHead(selector, columnsCount);
-  tableResizing(selector);
+  const $table = document.getElementById(selector);
+  generateTable($table, rowsCount, columnsCount);
+  generateTableHead($table, columnsCount);
+  initResizing();
 }
