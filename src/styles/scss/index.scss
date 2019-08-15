@@ -1,3 +1,5 @@
+@import '~normalize.css';
+
 html {
   box-sizing: border-box;
 }
@@ -34,8 +36,8 @@ td {
   border: 1px solid #808080;
 }
 
-.ceil {
-  width: 100%;
+th {
+  position: relative;
 }
 
 .count {
@@ -43,3 +45,16 @@ td {
   text-align: center;
 }
 
+.separator {
+  top: 0;
+  right: 0;
+  width: 4px;
+  position: absolute;
+  cursor: col-resize;
+  user-select: none;
+  height: 667px;
+
+  &:hover {
+    border-right: 2px solid #0000ff;
+  }
+}
