@@ -1,7 +1,10 @@
 @import '../../node_modules/normalize.css';
 
-// blocks
-@import 'blocks/base';
+// global styles
+@import 'global/variables';
+@import 'global/base';
+
+// blocks styles
 @import 'blocks/container';
 @import 'blocks/header';
 @import 'blocks/field';

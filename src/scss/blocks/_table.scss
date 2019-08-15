@@ -14,22 +14,38 @@ th {
 }
 
 .count {
+  position: relative;
   width: 40px;
   background-color: #f8f9fa;
   text-align: center;
 }
 
-.separator {
-  top: 0;
-  right: 0;
-  width: 4px;
+.sep {
   position: absolute;
-  cursor: col-resize;
-  user-select: none;
-  height: 100%;
 
-  &:hover {
-    border-right: 2px solid #0000ff;
+  &--vertical {
+    top: 0;
+    right: 0;
+    width: 4px;
+    cursor: col-resize;
+    user-select: none;
+    height: 100%;
+
+    &:hover {
+      border-right: 3px solid var(--cell--hover);
+    }
+  }
+
+  &--gorizontal {
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    cursor: row-resize;
+    width: 40px;
+
+    &:hover {
+      border-bottom: 3px solid var(--cell--hover);
+    }
   }
 }
 
