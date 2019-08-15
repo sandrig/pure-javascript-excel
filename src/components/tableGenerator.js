@@ -7,7 +7,7 @@ function generateTableHead(table, columnsCount) {
 
   for (let i = 0; i < columnsCount; i++) {
     const th = document.createElement('th');
-    const textFirstColumn = document.createTextNode('№');
+    const textFirstColumn = document.createTextNode('');
     const textOtherColumn = document.createTextNode(
       `${String.fromCharCode('A'.charCodeAt(0) + i - 1)}`,
     );

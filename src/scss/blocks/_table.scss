@@ -15,6 +15,7 @@ th {
 
 .count {
   width: 40px;
+  background-color: #f8f9fa;
   text-align: center;
 }
 
@@ -30,4 +31,8 @@ th {
   &:hover {
     border-right: 2px solid #0000ff;
   }
+}
+
+#row-head {
+  background-color: #f8f9fa;
 }
