@@ -7,11 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
 
-  <body>
+  <body class="body">
+    <header class="header">
+      <div class="container">
+        <nav class="menu">
+          <ul class="menu__list">
+            <li class="menu__item">
+              <a class="menu__link" href="#">Excel</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
     <main class="main">
-      <nav class="menu">
-        Меню
-      </nav>
       <div class="field">
         <label for="formula" class="field__label">
           Формула
@@ -20,5 +28,12 @@
       </div>
       <table id="table"></table>
     </main>
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__copyright">
+          © <time datetime="2019">2019</time> Андрей Савельев
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

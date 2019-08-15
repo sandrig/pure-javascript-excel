@@ -37,7 +37,7 @@ module.exports = {
 
   resolve: {
     alias: {
-      '@scss': path.resolve(__dirname, '../src/styles/scss'),
+      '@scss': path.resolve(__dirname, '../src/scss'),
       '@': path.resolve(__dirname, '../src'),
     },
     modules: ['node_modules', path.resolve(__dirname, 'src')],
