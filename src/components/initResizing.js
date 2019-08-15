@@ -5,38 +5,38 @@ export function initResizing() {
 
   function setListeners() {
     let pageX;
-    let curCol;
-    let nxtCol;
-    let curColWidth;
-    let nxtColWidth;
+    let currentColumn;
+    let nextColumn;
+    let currentColumnWidth;
+    let nextColumnWidth;
 
     const onMove = (e) => {
-      if (curCol) {
+      if (currentColumn) {
         const diffX = e.pageX - pageX;
-        if (nxtCol) nxtCol.style.width = `${nxtColWidth - diffX}px`;
-        curCol.style.width = `${curColWidth + diffX}px`;
+        if (nextColumn) nextColumn.style.width = `${nextColumnWidth - diffX}px`;
+        currentColumn.style.width = `${currentColumnWidth + diffX}px`;
       }
     };
 
     document.addEventListener('mousedown', (e) => {
-      if (!e.target.dataset.resize) {
+      if (!e.target.dataset.resizeColumn) {
         return;
       }
 
-      curCol = e.target.closest('th');
+      currentColumn = e.target.closest('th');
       pageX = e.pageX;
-      curColWidth = curCol.offsetWidth;
+      currentColumnWidth = currentColumn.offsetWidth;
 
       document.addEventListener('mousemove', onMove);
     });
 
     document.addEventListener('mouseup', () => {
       document.removeEventListener('mousemove', onMove);
-      curCol = null;
-      nxtCol = null;
+      currentColumn = null;
+      nextColumn = null;
       pageX = null;
-      nxtColWidth = null;
-      curColWidth = null;
+      nextColumnWidth = null;
+      currentColumnWidth = null;
     });
   }
 

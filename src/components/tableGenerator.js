@@ -22,7 +22,7 @@ function generateTableHead(table, columnsCount) {
 
     th.insertAdjacentHTML(
       'beforeend',
-      "<div class='separator' data-resize='column'></div>",
+      "<div class='sep sep--vertical' data-resize-column='vertical'></div>",
     );
   }
 }
@@ -40,6 +40,10 @@ function generateTable(table, row, column) {
       if (j === 0) {
         td.classList.add('count');
         td.innerText = i + 1;
+        td.insertAdjacentHTML(
+          'beforeend',
+          "<div class='sep sep--gorizontal' data-resize-row='horizontal'></div>",
+        );
         tr.appendChild(td);
       } else {
         editableDiv.setAttribute('contenteditable', 'true');
