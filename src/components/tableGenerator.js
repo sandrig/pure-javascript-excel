@@ -20,6 +20,7 @@ function generateTableHead(table, columnsCount) {
       row.appendChild(th);
     }
 
+    th.classList.add('resizable', 'resizable--headers');
     th.insertAdjacentHTML(
       'beforeend',
       "<div class='sep sep--vertical' data-resize-column='vertical'></div>",
@@ -38,7 +39,7 @@ function generateTable(table, row, column) {
       const editableDiv = document.createElement('div');
 
       if (j === 0) {
-        td.classList.add('count');
+        td.classList.add('resizable', 'resizable--numbers');
         td.innerText = i + 1;
         td.insertAdjacentHTML(
           'beforeend',

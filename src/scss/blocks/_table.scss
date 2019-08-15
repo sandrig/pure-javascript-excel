@@ -13,11 +13,13 @@ th {
   position: relative;
 }
 
-.count {
-  position: relative;
-  width: 40px;
-  background-color: #f8f9fa;
-  text-align: center;
+.resizable {
+  &--numbers {
+    position: relative;
+    width: 40px;
+    background-color: #f8f9fa;
+    text-align: center;
+  }
 }
 
 .sep {

@@ -1,8 +1,4 @@
 export function initResizing() {
-  const row = document.getElementById('row-head');
-  const cols = row ? row.children : undefined;
-  if (!cols) return;
-
   function setListeners() {
     let pageX;
     let currentColumn;
@@ -10,12 +6,24 @@ export function initResizing() {
     let currentColumnWidth;
     let nextColumnWidth;
 
+    let pageY;
+    let currentRow;
+    let nextRow;
+    let currentRowHeight;
+    let nextRowHeight;
+
     const onMove = (e) => {
       if (currentColumn) {
         const diffX = e.pageX - pageX;
         if (nextColumn) nextColumn.style.width = `${nextColumnWidth - diffX}px`;
         currentColumn.style.width = `${currentColumnWidth + diffX}px`;
       }
+
+      // if (currentRow) {
+      //   const diffY = e.pageY - pageY;
+      //   if (nextRow) nextRow.style.height = `${nextRowHeight - diffY}px`;
+      //   currentColumn.style.width = `${currentRowHeight + diffY}px`;
+      // }
     };
 
     document.addEventListener('mousedown', (e) => {
@@ -23,9 +31,17 @@ export function initResizing() {
         return;
       }
 
+      // if (!e.target.dataset.resizeRow) {
+      //   return;
+      // }
+
       currentColumn = e.target.closest('th');
       pageX = e.pageX;
       currentColumnWidth = currentColumn.offsetWidth;
+
+      // currentRow = e.target.closest('resizable--numbers');
+      // pageY = e.pageY;
+      // currentRowHeight = currentRow.offsetHeight;
 
       document.addEventListener('mousemove', onMove);
     });
@@ -37,6 +53,12 @@ export function initResizing() {
       pageX = null;
       nextColumnWidth = null;
       currentColumnWidth = null;
+
+      pageY = null;
+      currentRow = null;
+      nextRow = null;
+      currentRowHeight = null;
+      nextRowHeight = null;
     });
   }
 
