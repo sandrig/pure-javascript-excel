@@ -1,8 +1,8 @@
 .footer {
   flex-shrink: 0;
   padding: 40px 0;
-  color: #1b1b32;
-  background: #eeeef0;
+  color: var(--footer-text-color);
+  background: var(--footer-background-color);
   &__copyright {
     text-align: center;
   }
