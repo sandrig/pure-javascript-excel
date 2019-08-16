@@ -27,25 +27,17 @@ export function initResizing() {
     };
 
     document.addEventListener('mousedown', (e) => {
-      if (!e.target.dataset.resizeColumn) {
+      if (e.target.dataset.resizeColumn) {
+        currentColumn = e.target.parentElement;
+        pageX = e.pageX;
+        currentColumnWidth = currentColumn.offsetWidth;
+      } else if (e.target.dataset.resizeRow) {
+        currentRow = e.target.parentElement;
+        pageY = e.pageY;
+        currentRowHeight = currentRow.offsetHeight;
+      } else {
         return;
       }
-
-      currentColumn = e.target.parentElement;
-      pageX = e.pageX;
-      currentColumnWidth = currentColumn.offsetWidth;
-
-      document.addEventListener('mousemove', onMove);
-    });
-
-    document.addEventListener('mousedown', (e) => {
-      if (!e.target.dataset.resizeRow) {
-        return;
-      }
-
-      currentRow = e.target.parentElement;
-      pageY = e.pageY;
-      currentRowHeight = currentRow.offsetHeight;
 
       document.addEventListener('mousemove', onMove);
     });
