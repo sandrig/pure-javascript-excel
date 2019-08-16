@@ -3,7 +3,7 @@ import { initResizing } from '@/components/initResizing';
 function generateTableHead(table, columnsCount) {
   const thead = table.createTHead();
   const row = thead.insertRow();
-  row.id = 'row-head';
+  row.className = 'row row--header';
 
   for (let i = 0; i < columnsCount; i++) {
     const th = document.createElement('th');
@@ -17,14 +17,13 @@ function generateTableHead(table, columnsCount) {
       row.appendChild(th);
     } else {
       th.appendChild(textOtherColumn);
-      th.classList.add('resizable', 'resizable--headers');
+      th.className = 'resizable resizable--headers';
+      th.insertAdjacentHTML(
+        'beforeend',
+        "<div class='sep sep--vertical' data-resize-column='vertical'></div>",
+      );
       row.appendChild(th);
     }
-
-    th.insertAdjacentHTML(
-      'beforeend',
-      "<div class='sep sep--vertical' data-resize-column='vertical'></div>",
-    );
   }
 }
 
@@ -39,7 +38,7 @@ function generateTable(table, row, column) {
       const editableDiv = document.createElement('div');
 
       if (j === 0) {
-        td.classList.add('resizable', 'resizable--numbers');
+        td.className = 'resizable resizable--numbers';
         td.innerText = i + 1;
         td.insertAdjacentHTML(
           'beforeend',

@@ -13,11 +13,11 @@ export function initResizing() {
     let nextRowHeight;
 
     const onMove = (e) => {
-      // if (currentColumn) {
-      //   const diffX = e.pageX - pageX;
-      //   if (nextColumn) nextColumn.style.width = `${nextColumnWidth - diffX}px`;
-      //   currentColumn.style.width = `${currentColumnWidth + diffX}px`;
-      // }
+      if (currentColumn) {
+        const diffX = e.pageX - pageX;
+        if (nextColumn) nextColumn.style.width = `${nextColumnWidth - diffX}px`;
+        currentColumn.style.width = `${currentColumnWidth + diffX}px`;
+      }
 
       if (currentRow) {
         const diffY = e.pageY - pageY;
@@ -27,19 +27,21 @@ export function initResizing() {
     };
 
     document.addEventListener('mousedown', (e) => {
-      // if (!e.target.dataset.resizeColumn) {
-      //   return;
-      // }
-
-      if (!e.target.dataset.resizeRow) {
+      if (!e.target.dataset.resizeColumn) {
         return;
       }
 
-      // currentColumn = e.target.closest('th');
+      currentColumn = e.target.parentElement;
+      pageX = e.pageX;
+      currentColumnWidth = currentColumn.offsetWidth;
 
-      // currentColumn = e.target.parentElement;
-      // pageX = e.pageX;
-      // currentColumnWidth = currentColumn.offsetWidth;
+      document.addEventListener('mousemove', onMove);
+    });
+
+    document.addEventListener('mousedown', (e) => {
+      if (!e.target.dataset.resizeRow) {
+        return;
+      }
 
       currentRow = e.target.parentElement;
       pageY = e.pageY;
