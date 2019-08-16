@@ -13,35 +13,37 @@ export function initResizing() {
     let nextRowHeight;
 
     const onMove = (e) => {
-      if (currentColumn) {
-        const diffX = e.pageX - pageX;
-        if (nextColumn) nextColumn.style.width = `${nextColumnWidth - diffX}px`;
-        currentColumn.style.width = `${currentColumnWidth + diffX}px`;
-      }
-
-      // if (currentRow) {
-      //   const diffY = e.pageY - pageY;
-      //   if (nextRow) nextRow.style.height = `${nextRowHeight - diffY}px`;
-      //   currentColumn.style.width = `${currentRowHeight + diffY}px`;
+      // if (currentColumn) {
+      //   const diffX = e.pageX - pageX;
+      //   if (nextColumn) nextColumn.style.width = `${nextColumnWidth - diffX}px`;
+      //   currentColumn.style.width = `${currentColumnWidth + diffX}px`;
       // }
+
+      if (currentRow) {
+        const diffY = e.pageY - pageY;
+        if (nextRow) nextRow.style.height = `${nextRowHeight - diffY}px`;
+        currentRow.style.height = `${currentRowHeight + diffY}px`;
+      }
     };
 
     document.addEventListener('mousedown', (e) => {
-      if (!e.target.dataset.resizeColumn) {
-        return;
-      }
-
-      // if (!e.target.dataset.resizeRow) {
+      // if (!e.target.dataset.resizeColumn) {
       //   return;
       // }
 
-      currentColumn = e.target.closest('th');
-      pageX = e.pageX;
-      currentColumnWidth = currentColumn.offsetWidth;
+      if (!e.target.dataset.resizeRow) {
+        return;
+      }
 
-      // currentRow = e.target.closest('resizable--numbers');
-      // pageY = e.pageY;
-      // currentRowHeight = currentRow.offsetHeight;
+      // currentColumn = e.target.closest('th');
+
+      // currentColumn = e.target.parentElement;
+      // pageX = e.pageX;
+      // currentColumnWidth = currentColumn.offsetWidth;
+
+      currentRow = e.target.parentElement;
+      pageY = e.pageY;
+      currentRowHeight = currentRow.offsetHeight;
 
       document.addEventListener('mousemove', onMove);
     });

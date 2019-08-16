@@ -17,10 +17,10 @@ function generateTableHead(table, columnsCount) {
       row.appendChild(th);
     } else {
       th.appendChild(textOtherColumn);
+      th.classList.add('resizable', 'resizable--headers');
       row.appendChild(th);
     }
 
-    th.classList.add('resizable', 'resizable--headers');
     th.insertAdjacentHTML(
       'beforeend',
       "<div class='sep sep--vertical' data-resize-column='vertical'></div>",
