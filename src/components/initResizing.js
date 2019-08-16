@@ -1,15 +1,14 @@
 export function initResizing() {
   function setListeners() {
     let pageX;
-    let currentColumn;
-    let nextColumn;
-    let currentColumnWidth;
-    let nextColumnWidth;
-
     let pageY;
+    let currentColumn;
     let currentRow;
+    let nextColumn;
     let nextRow;
+    let currentColumnWidth;
     let currentRowHeight;
+    let nextColumnWidth;
     let nextRowHeight;
 
     const onMove = (e) => {
@@ -44,16 +43,15 @@ export function initResizing() {
 
     document.addEventListener('mouseup', () => {
       document.removeEventListener('mousemove', onMove);
-      currentColumn = null;
-      nextColumn = null;
       pageX = null;
-      nextColumnWidth = null;
-      currentColumnWidth = null;
-
       pageY = null;
+      currentColumn = null;
       currentRow = null;
+      nextColumn = null;
       nextRow = null;
+      currentColumnWidth = null;
       currentRowHeight = null;
+      nextColumnWidth = null;
       nextRowHeight = null;
     });
   }
