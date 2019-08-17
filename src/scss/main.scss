@@ -1,0 +1,14 @@
+@import '../../node_modules/normalize.css';
+
+// global styles
+@import 'global/variables';
+@import 'global/base';
+
+// blocks styles
+@import 'blocks/container';
+@import 'blocks/title';
+@import 'blocks/header';
+@import 'blocks/field';
+@import 'blocks/menu';
+@import 'blocks/table';
+@import 'blocks/footer';

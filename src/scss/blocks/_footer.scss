@@ -1,0 +1,9 @@
+.footer {
+  flex-shrink: 0;
+  padding: 40px 0;
+  color: $footer-text-color;
+  background: $footer-background-color;
+  &__copyright {
+    text-align: center;
+  }
+}

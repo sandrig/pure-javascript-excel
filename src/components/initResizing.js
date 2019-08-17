@@ -1,42 +1,58 @@
 export function initResizing() {
-  const row = document.getElementById('row-head');
-  const cols = row ? row.children : undefined;
-  if (!cols) return;
-
   function setListeners() {
     let pageX;
-    let curCol;
-    let nxtCol;
-    let curColWidth;
-    let nxtColWidth;
+    let pageY;
+    let currentColumn;
+    let currentRow;
+    let nextColumn;
+    let nextRow;
+    let currentColumnWidth;
+    let currentRowHeight;
+    let nextColumnWidth;
+    let nextRowHeight;
 
     const onMove = (e) => {
-      if (curCol) {
+      if (currentColumn) {
         const diffX = e.pageX - pageX;
-        if (nxtCol) nxtCol.style.width = `${nxtColWidth - diffX}px`;
-        curCol.style.width = `${curColWidth + diffX}px`;
+        if (nextColumn) nextColumn.style.width = `${nextColumnWidth - diffX}px`;
+        currentColumn.style.width = `${currentColumnWidth + diffX}px`;
+      }
+
+      if (currentRow) {
+        const diffY = e.pageY - pageY;
+        if (nextRow) nextRow.style.height = `${nextRowHeight - diffY}px`;
+        currentRow.style.height = `${currentRowHeight + diffY}px`;
       }
     };
 
     document.addEventListener('mousedown', (e) => {
-      if (!e.target.dataset.resize) {
+      if (e.target.dataset.resizeColumn) {
+        currentColumn = e.target.parentElement;
+        pageX = e.pageX;
+        currentColumnWidth = currentColumn.offsetWidth;
+      } else if (e.target.dataset.resizeRow) {
+        currentRow = e.target.parentElement;
+        pageY = e.pageY;
+        currentRowHeight = currentRow.offsetHeight;
+      } else {
         return;
       }
-
-      curCol = e.target.closest('th');
-      pageX = e.pageX;
-      curColWidth = curCol.offsetWidth;
 
       document.addEventListener('mousemove', onMove);
     });
 
     document.addEventListener('mouseup', () => {
       document.removeEventListener('mousemove', onMove);
-      curCol = null;
-      nxtCol = null;
       pageX = null;
-      nxtColWidth = null;
-      curColWidth = null;
+      pageY = null;
+      currentColumn = null;
+      currentRow = null;
+      nextColumn = null;
+      nextRow = null;
+      currentColumnWidth = null;
+      currentRowHeight = null;
+      nextColumnWidth = null;
+      nextRowHeight = null;
     });
   }
 

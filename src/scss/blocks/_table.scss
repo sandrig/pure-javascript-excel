@@ -1,0 +1,64 @@
+.table {
+  border-collapse: collapse;
+
+  &__wrapper {
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: scroll;
+  }
+}
+
+tr,
+th,
+td {
+  border: 1px solid $table-border-color;
+}
+
+.resizable {
+  position: relative;
+  &--headers {
+    min-width: 80px;
+  }
+
+  &--numbers {
+    position: relative;
+    min-width: 40px;
+    background-color: $col-numbers-color;
+    text-align: center;
+  }
+}
+
+.sep {
+  position: absolute;
+
+  &--vertical {
+    top: 0;
+    right: 0;
+    width: 4px;
+    cursor: col-resize;
+    user-select: none;
+    height: 100%;
+
+    &:hover {
+      border-right: 3px solid $cell-hover-color;
+    }
+  }
+
+  &--gorizontal {
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    cursor: row-resize;
+    width: 40px;
+
+    &:hover {
+      border-bottom: 3px solid $cell-hover-color;
+    }
+  }
+}
+
+.row {
+  &--header {
+    background-color: $row-header-background-color;
+  }
+}
