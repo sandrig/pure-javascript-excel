@@ -17,7 +17,7 @@ function generateTableHead(table, columnsCount) {
       row.appendChild(th);
     } else {
       th.appendChild(textOtherColumn);
-      th.className = 'resizable resizable--headers';
+      th.className = 'resizable resizable--column';
       th.insertAdjacentHTML(
         'beforeend',
         '<div class="sep sep--vertical" data-resize-column="vertical"></div>',
@@ -38,7 +38,7 @@ function generateTable(table, row, column) {
       const editableDiv = document.createElement('div');
 
       if (j === 0) {
-        td.className = 'resizable resizable--numbers';
+        td.className = 'resizable resizable--row';
         td.innerText = i + 1;
         td.insertAdjacentHTML(
           'beforeend',

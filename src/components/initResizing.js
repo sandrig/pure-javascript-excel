@@ -4,38 +4,38 @@ export function initResizing() {
     let pageY;
     let currentColumn;
     let currentRow;
-    let nextColumn;
-    let nextRow;
     let currentColumnWidth;
     let currentRowHeight;
-    let nextColumnWidth;
-    let nextRowHeight;
 
-    const onMove = (e) => {
+    const onMove = (event) => {
       if (currentColumn) {
-        const diffX = e.pageX - pageX;
-        if (nextColumn) nextColumn.style.width = `${nextColumnWidth - diffX}px`;
+        const diffX = event.pageX - pageX;
         currentColumn.style.width = `${currentColumnWidth + diffX}px`;
       }
 
       if (currentRow) {
-        const diffY = e.pageY - pageY;
-        if (nextRow) nextRow.style.height = `${nextRowHeight - diffY}px`;
+        const diffY = event.pageY - pageY;
         currentRow.style.height = `${currentRowHeight + diffY}px`;
       }
     };
 
-    document.addEventListener('mousedown', (e) => {
-      if (e.target.dataset.resizeColumn) {
-        currentColumn = e.target.parentElement;
-        pageX = e.pageX;
+    document.addEventListener('mousedown', (event) => {
+      const draggable = event.target.closest('.resizable');
+      const draggableColumn = draggable.classList.contains('resizable--column');
+      const draggableRow = draggable.classList.contains('resizable--row');
+
+      if (!draggable) return;
+
+      if (draggableColumn) {
+        currentColumn = event.target.parentElement;
+        pageX = event.pageX;
         currentColumnWidth = currentColumn.offsetWidth;
-      } else if (e.target.dataset.resizeRow) {
-        currentRow = e.target.parentElement;
-        pageY = e.pageY;
+      }
+
+      if (draggableRow) {
+        currentRow = event.target.parentElement;
+        pageY = event.pageY;
         currentRowHeight = currentRow.offsetHeight;
-      } else {
-        return;
       }
 
       document.addEventListener('mousemove', onMove);
@@ -47,12 +47,8 @@ export function initResizing() {
       pageY = null;
       currentColumn = null;
       currentRow = null;
-      nextColumn = null;
-      nextRow = null;
       currentColumnWidth = null;
       currentRowHeight = null;
-      nextColumnWidth = null;
-      nextRowHeight = null;
     });
   }
 

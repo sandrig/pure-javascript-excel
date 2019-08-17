@@ -16,11 +16,11 @@ td {
 
 .resizable {
   position: relative;
-  &--headers {
+  &--column {
     min-width: 80px;
   }
 
-  &--numbers {
+  &--row {
     position: relative;
     min-width: 40px;
     background-color: $col-numbers-color;
