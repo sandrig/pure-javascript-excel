@@ -20,7 +20,7 @@ function generateTableHead(table, columnsCount) {
       th.className = 'resizable resizable--headers';
       th.insertAdjacentHTML(
         'beforeend',
-        "<div class='sep sep--vertical' data-resize-column='vertical'></div>",
+        '<div class="sep sep--vertical" data-resize-column="vertical"></div>',
       );
       row.appendChild(th);
     }
