@@ -10,7 +10,7 @@
   }
 
   &__link {
-    color: var(--menu-text-color);
+    color: $menu-text-color;
     text-decoration: none;
 
     &:hover {
