@@ -58,7 +58,7 @@ function generateTable(table, row, column) {
 
 export function createTable(selector, rowsCount, columnsCount) {
   const $table = document.getElementById(selector);
-  generateTable($table, rowsCount, columnsCount);
   generateTableHead($table, columnsCount);
+  generateTable($table, rowsCount, columnsCount);
   initResizing();
 }
