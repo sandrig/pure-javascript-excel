@@ -11,7 +11,7 @@ function createRow(row, data) {
       class="table__row"
       data-type="resizible"
       data-row="${row}"
-      style="height: ${height + 'px'};"
+      style="height: ${height}${'px'};"
     >
       <div class="table__row-counter">
         ${row || ''}
@@ -31,7 +31,7 @@ function createColumn(columnData, index) {
       class="table__column"
       data-column="${index}"
       data-type="resizible"
-      style="width: ${width + 'px'};"
+      style="width: ${width}${'px'};"
     >
       ${columnData}
       <div class="table__column-resize" data-resize="column"></div>
@@ -48,7 +48,7 @@ function createCell(column, row) {
       data-row="${row}"
       data-type="cell"
       contenteditable="true"
-      style="width: ${width + 'px'};"
+      style="width: ${width}${'px'};"
     ></div>
   `;
 }
