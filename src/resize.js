@@ -21,7 +21,6 @@ export function initResizing() {
           el.style.width = `${width}px`;
           return el;
         });
-        // const let = cell.style.width;
       } else if (resize === 'row') {
         const delta = Math.floor(e.pageY - event.pageY);
         const height = offsetHeight + delta;
