@@ -1,64 +1,59 @@
 .table {
-  border-collapse: collapse;
+  max-width: 100%;
+  overflow-x: auto;
 
-  &__wrapper {
-    width: 100%;
-    overflow-y: scroll;
-    overflow-x: scroll;
-  }
-}
-
-tr,
-th,
-td {
-  border: 1px solid $table-border-color;
-}
-
-.resizable {
-  position: relative;
-  &--column {
-    min-width: 80px;
-  }
-
-  &--row {
+  &__row {
+    display: flex;
     position: relative;
-    min-width: 40px;
-    background-color: $col-numbers-color;
+
+    &-counter {
+      min-width: 40px;
+      background-color: #f8f9fa;
+      border: 1px solid #e2e3e3;
+      text-align: center;
+    }
+
+    &-data {
+      display: flex;
+    }
+
+    &-resize {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 4px;
+      cursor: n-resize;
+      width: 40px;
+
+      &:hover {
+        border-bottom: 4px solid #4d90fe;
+      }
+    }
+  }
+
+  &__column {
+    position: relative;
     text-align: center;
-  }
-}
+    border: 1px solid #e2e3e3;
+    background-color: #f8f9fa;
 
-.sep {
-  position: absolute;
+    &-resize {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 4px;
+      cursor: e-resize;
+      user-select: none;
+      height: 100%;
 
-  &--vertical {
-    top: 0;
-    right: 0;
-    width: 4px;
-    cursor: col-resize;
-    user-select: none;
-    height: 100%;
-
-    &:hover {
-      border-right: 3px solid $cell-hover-color;
+      &:hover {
+        border-right: 4px solid #4d90fe;
+      }
     }
   }
 
-  &--gorizontal {
-    left: 0;
-    bottom: 0;
-    height: 3px;
-    cursor: row-resize;
-    width: 40px;
-
-    &:hover {
-      border-bottom: 3px solid $cell-hover-color;
-    }
-  }
-}
-
-.row {
-  &--header {
-    background-color: $row-header-background-color;
+  &__cell {
+    min-width: 40px;
+    border: 1px solid #e2e3e3;
   }
 }

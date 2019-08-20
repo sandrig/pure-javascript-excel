@@ -1,4 +1,6 @@
 .menu {
+  padding: 0 20px;
+
   &__list {
     margin: 0;
     padding: 0;
@@ -10,7 +12,7 @@
   }
 
   &__link {
-    color: $menu-text-color;
+    color: #ffffff;
     text-decoration: none;
 
     &:hover {
