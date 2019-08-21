@@ -1,3 +1,5 @@
+import { initResizing } from './resize';
+
 const COLUMN_DEFAULT_WIDTH = '120px';
 const ROW_DEFAULT_HEIGHT = '24px';
 
@@ -38,7 +40,7 @@ function createCell(column, row) {
   return `
     <div
       class="table__cell"
-      data-col="${column}"
+      data-column="${column}"
       data-row="${row}"
       data-type="cell"
       contenteditable="true"
@@ -47,8 +49,7 @@ function createCell(column, row) {
   `;
 }
 
-export function createTable(selector, rowsCount, columnsCount) {
-  const $table = document.querySelector(selector);
+function createTableMarkup(table, rowsCount, columnsCount) {
   const rows = [];
   const columns = new Array(columnsCount)
     .fill('')
@@ -68,5 +69,11 @@ export function createTable(selector, rowsCount, columnsCount) {
 
   const tableMarkup = rows.join('');
 
-  $table.insertAdjacentHTML('afterbegin', tableMarkup);
+  table.insertAdjacentHTML('afterbegin', tableMarkup);
+}
+
+export function createTable(selector, rowsCount, columnsCount) {
+  const $table = document.querySelector(selector);
+  createTableMarkup($table, rowsCount, columnsCount);
+  initResizing();
 }

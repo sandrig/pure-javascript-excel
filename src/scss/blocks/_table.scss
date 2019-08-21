@@ -5,6 +5,7 @@
   &__row {
     display: flex;
     position: relative;
+    min-height: 24px;
 
     &-counter {
       min-width: 40px;
@@ -33,6 +34,7 @@
 
   &__column {
     position: relative;
+    min-width: 40px;
     text-align: center;
     border: 1px solid #e2e3e3;
     background-color: #f8f9fa;
