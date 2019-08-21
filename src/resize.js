@@ -11,6 +11,7 @@ export function initResizing() {
     const $parent = event.target.closest('[data-type="resizible"]');
     const { offsetWidth, offsetHeight } = $parent;
     const columnId = $parent.dataset.column;
+    const rowId = $parent.dataset.row;
     const selector = `[data-column="${columnId}"]`;
     const columns = Array.from(document.querySelectorAll(selector));
 
@@ -25,7 +26,6 @@ export function initResizing() {
         });
         saveState('columnState', columnId, width);
       } else if (resize === 'row') {
-        const rowId = $parent.dataset.row;
         const delta = Math.floor(e.pageY - event.pageY);
         const height = offsetHeight + delta;
         $parent.style.height = `${height}px`;
