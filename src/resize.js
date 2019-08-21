@@ -10,14 +10,14 @@ export function initResizing() {
 
     const $parent = event.target.closest('[data-type="resizible"]');
     const { offsetWidth, offsetHeight } = $parent;
+    const columnId = $parent.dataset.column;
+    const selector = `[data-column="${columnId}"]`;
+    const columns = Array.from(document.querySelectorAll(selector));
 
     document.onmousemove = (e) => {
       if (resize === 'column') {
-        const columnId = $parent.dataset.column;
-        const selector = `[data-column="${columnId}"]`;
         const delta = Math.floor(e.pageX - event.pageX);
         const width = offsetWidth + delta;
-        const columns = Array.from(document.querySelectorAll(selector));
         columns.forEach((cell) => {
           const el = cell;
           el.style.width = `${width}px`;
