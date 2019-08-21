@@ -1,15 +1,17 @@
 import { initResizing } from './resize';
+import { getState } from './state';
 
-const COLUMN_DEFAULT_WIDTH = '120px';
-const ROW_DEFAULT_HEIGHT = '24px';
+const COLUMN_DEFAULT_WIDTH = 120;
+const ROW_DEFAULT_HEIGHT = 24;
 
 function createRow(row, data) {
+  const height = getState('rowState', row, ROW_DEFAULT_HEIGHT);
   return `
     <div
       class="table__row"
       data-type="resizible"
       data-row="${row}"
-      style="height: ${ROW_DEFAULT_HEIGHT};"
+      style="height: ${height}${'px'};"
     >
       <div class="table__row-counter">
         ${row || ''}
@@ -23,12 +25,13 @@ function createRow(row, data) {
 }
 
 function createColumn(columnData, index) {
+  const width = getState('columnState', index, COLUMN_DEFAULT_WIDTH);
   return `
     <div
       class="table__column"
       data-column="${index}"
       data-type="resizible"
-      style="width: ${COLUMN_DEFAULT_WIDTH};"
+      style="width: ${width}${'px'};"
     >
       ${columnData}
       <div class="table__column-resize" data-resize="column"></div>
@@ -37,6 +40,7 @@ function createColumn(columnData, index) {
 }
 
 function createCell(column, row) {
+  const width = getState('columnState', column, COLUMN_DEFAULT_WIDTH);
   return `
     <div
       class="table__cell"
@@ -44,7 +48,7 @@ function createCell(column, row) {
       data-row="${row}"
       data-type="cell"
       contenteditable="true"
-      style="width: ${COLUMN_DEFAULT_WIDTH};"
+      style="width: ${width}${'px'};"
     ></div>
   `;
 }
