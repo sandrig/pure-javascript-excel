@@ -12,3 +12,18 @@ export function getState(name, index, defaultValue) {
     : {};
   return state[index] ? state[index] : defaultValue;
 }
+
+export function saveContentCell(id, value) {
+  const state = localStorage.getItem(id)
+    ? JSON.parse(localStorage.getItem(id))
+    : {};
+  state[id] = value;
+  localStorage.setItem(id, JSON.stringify(state));
+}
+
+export function getContentCell(id) {
+  const state = localStorage.getItem(id)
+    ? JSON.parse(localStorage.getItem(id))
+    : {};
+  return state[id] ? state[id] : '';
+}

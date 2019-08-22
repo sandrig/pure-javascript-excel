@@ -1,5 +1,5 @@
 import { initResizing } from './resize';
-import { getState } from './state';
+import { getContentCell, getState } from './state';
 
 const COLUMN_DEFAULT_WIDTH = 120;
 const ROW_DEFAULT_HEIGHT = 24;
@@ -41,6 +41,8 @@ function createColumn(columnData, index) {
 
 function createCell(column, row) {
   const width = getState('columnState', column, COLUMN_DEFAULT_WIDTH);
+  const id = `${row}:${column}`;
+  const data = getContentCell(id);
   return `
     <div
       class="table__cell"
@@ -49,7 +51,7 @@ function createCell(column, row) {
       data-type="cell"
       contenteditable="true"
       style="width: ${width}${'px'};"
-    ></div>
+    >${data}</div>
   `;
 }
 
