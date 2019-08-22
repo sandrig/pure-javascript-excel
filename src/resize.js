@@ -1,4 +1,4 @@
-import { saveState } from './state';
+import { saveResizableValue } from './state';
 
 export function initResizing() {
   document.addEventListener('mousedown', (event) => {
@@ -24,12 +24,12 @@ export function initResizing() {
           el.style.width = `${width}px`;
           return el;
         });
-        saveState('columnState', columnId, width);
+        saveResizableValue('columnState', columnId, width);
       } else if (resize === 'row') {
         const delta = Math.floor(e.pageY - event.pageY);
         const height = offsetHeight + delta;
         $parent.style.height = `${height}px`;
-        saveState('rowState', rowId, height);
+        saveResizableValue('rowState', rowId, height);
       }
     };
 

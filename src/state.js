@@ -1,4 +1,4 @@
-export function saveState(name, key, value) {
+export function saveResizableValue(name, key, value) {
   const state = localStorage.getItem(name)
     ? JSON.parse(localStorage.getItem(name))
     : {};
@@ -6,7 +6,7 @@ export function saveState(name, key, value) {
   localStorage.setItem(name, JSON.stringify(state));
 }
 
-export function getState(name, index, defaultValue) {
+export function getResizableValue(name, index, defaultValue) {
   const state = localStorage.getItem(name)
     ? JSON.parse(localStorage.getItem(name))
     : {};
