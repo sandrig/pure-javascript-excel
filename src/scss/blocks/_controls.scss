@@ -4,6 +4,10 @@
   &__button {
     cursor: pointer;
 
+    * {
+      pointer-events: none;
+    }
+
     &:first-child {
       margin-left: 0;
     }
