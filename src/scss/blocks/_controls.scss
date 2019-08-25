@@ -1,0 +1,13 @@
+.controls {
+  margin-bottom: 20px;
+
+  &__button {
+    cursor: pointer;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    margin-left: 4px;
+  }
+}
