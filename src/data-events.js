@@ -12,26 +12,35 @@ export function initListeners() {
   });
 
   document.addEventListener('click', (event) => {
-    const { align, type } = event.target.dataset;
+    const { align, type, column } = event.target.dataset;
     const el = event.target;
-    const selectedEl = Array.from(
-      document.querySelectorAll('.table__cell--selected'),
+    const cells = Array.from(
+      document.querySelectorAll(`[data-column="${column}"]`),
+    );
+    const selectedCells = Array.from(
+      document.querySelectorAll('.table__cell--selected, .selected'),
     );
 
     if (type === 'cell') {
-      selectedEl.length !== 0
-        ? selectedEl.forEach((item) =>
-            item.classList.remove('table__cell--selected'),
+      selectedCells.length !== 0
+        ? selectedCells.forEach((item) =>
+            item.classList.remove('table__cell--selected', 'selected'),
           )
         : el.classList.add('table__cell--selected');
     }
 
-    if (event.target.dataset.column) {
-      // console.log(event.target.dataset.column);
-      const columnId = event.target.dataset.column;
-      const selector = `table__cell, [data-column="${columnId}"]`;
-      const columns = Array.from(document.querySelectorAll(selector));
-      columns.forEach((item) => item.classList.add('table__cell--selected'));
+    if (type === 'resizable') {
+      cells.forEach((item) => {
+        if (item.dataset.column === column) {
+          item.classList.add('selected');
+        }
+      });
+
+      selectedCells.forEach((item) => {
+        if (item.dataset.column !== column) {
+          item.classList.remove('selected');
+        }
+      });
     }
 
     if (!align) {
@@ -39,7 +48,7 @@ export function initListeners() {
     }
 
     const textAlignment = (position) => {
-      selectedEl.forEach((item) => (item.style.textAlign = position));
+      selectedCells.forEach((item) => (item.style.textAlign = position));
     };
 
     if (align === 'left') {
