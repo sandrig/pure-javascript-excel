@@ -58,6 +58,7 @@ module.exports = {
   },
 
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Pure JavaScript Excel',
       template: './src/index.html',
@@ -76,9 +77,6 @@ module.exports = {
         to: 'assets',
       },
     ]),
-    new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['dist'],
-    }),
   ],
 
   devServer: {
