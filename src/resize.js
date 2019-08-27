@@ -8,7 +8,7 @@ export function initResizing() {
       return;
     }
 
-    const $parent = event.target.closest('[data-type="resizible"]');
+    const $parent = event.target.closest('[data-type="resizable"]');
     const { offsetWidth, offsetHeight } = $parent;
     const columnId = $parent.dataset.column;
     const rowId = $parent.dataset.row;

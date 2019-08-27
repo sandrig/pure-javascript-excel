@@ -10,7 +10,7 @@ function createRow(row, data) {
   return `
     <div
       class="table__row"
-      data-type="resizible"
+      data-type="resizable"
       data-row="${row}"
       style="height: ${height}${'px'};"
     >
@@ -31,7 +31,7 @@ function createColumn(columnData, index) {
     <div
       class="table__column"
       data-column="${index}"
-      data-type="resizible"
+      data-type="resizable"
       style="width: ${width}${'px'};"
     >
       ${columnData}
