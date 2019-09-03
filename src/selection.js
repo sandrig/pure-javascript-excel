@@ -13,7 +13,7 @@ export class Selection {
   }
 
   clear() {
-    const cls = 'table__cell_selected';
+    const cls = 'selected';
     this.selectedItems.forEach((item) => {
       item.classList.remove(cls);
     });
@@ -21,6 +21,10 @@ export class Selection {
   }
 
   addAll(items) {
+    const cls = 'selected';
     this.selectedItems = [...items];
+    this.selectedItems.forEach((item) => {
+      item.classList.add(cls);
+    });
   }
 }
