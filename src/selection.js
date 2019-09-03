@@ -5,7 +5,7 @@ export class Selection {
 
   add(el) {
     this.selectedItems.push(el);
-    el.classList.add('table__cell_selected');
+    el.classList.add('table__cell--selected');
   }
 
   delete(el) {
@@ -13,18 +13,21 @@ export class Selection {
   }
 
   clear() {
-    const cls = 'selected';
+    const columnClass = 'selected';
+    const cellClass = 'table__cell--selected';
     this.selectedItems.forEach((item) => {
-      item.classList.remove(cls);
+      item.classList.remove(columnClass, cellClass);
     });
     this.selectedItems = [];
   }
 
   addAll(items) {
-    const cls = 'selected';
+    const columnClass = 'selected';
+    const cellClass = 'table__cell--selected';
     this.selectedItems = [...items];
     this.selectedItems.forEach((item) => {
-      item.classList.add(cls);
+      item.classList.add(columnClass);
+      item.classList.remove(cellClass);
     });
   }
 }

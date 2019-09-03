@@ -15,14 +15,20 @@ export function initListeners() {
   });
 
   document.addEventListener('click', (event) => {
-    const { column, select } = event.target.dataset;
+    const { type, column, select } = event.target.dataset;
+    const el = event.target;
 
     if (select === 'column') {
+      selection.clear();
       const selectedItems = document.querySelectorAll(
         `[data-column="${column}"]`,
       );
-      selection.clear();
       selection.addAll(selectedItems);
+    }
+
+    if (type === 'cell') {
+      selection.clear();
+      selection.add(el);
     }
   });
 }
