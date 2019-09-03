@@ -1,29 +1,16 @@
-export function saveResizableValue(name, key, value) {
-  const state = localStorage.getItem(name)
-    ? JSON.parse(localStorage.getItem(name))
+function checkState(value) {
+  return localStorage.getItem(value)
+    ? JSON.parse(localStorage.getItem(value))
     : {};
+}
+
+export function saveStateValue(name, key, value) {
+  const state = checkState(name);
   state[key] = value;
   localStorage.setItem(name, JSON.stringify(state));
 }
 
-export function getResizableValue(name, index, defaultValue) {
-  const state = localStorage.getItem(name)
-    ? JSON.parse(localStorage.getItem(name))
-    : {};
+export function getStateValue(name, index, defaultValue = '') {
+  const state = checkState(name);
   return state[index] ? state[index] : defaultValue;
-}
-
-export function saveContentCell(id, value) {
-  const state = localStorage.getItem(id)
-    ? JSON.parse(localStorage.getItem(id))
-    : {};
-  state[id] = value;
-  localStorage.setItem(id, JSON.stringify(state));
-}
-
-export function getContentCell(id) {
-  const state = localStorage.getItem(id)
-    ? JSON.parse(localStorage.getItem(id))
-    : {};
-  return state[id] ? state[id] : '';
 }

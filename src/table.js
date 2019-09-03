@@ -1,17 +1,18 @@
 import { initResizing } from './resize';
-import { getContentCell, getResizableValue } from './state';
+import { getStateValue } from './state';
 import { initListeners } from './data-events';
 
 const COLUMN_DEFAULT_WIDTH = 120;
 const ROW_DEFAULT_HEIGHT = 24;
 
 function createRow(row, data) {
-  const height = getResizableValue('rowState', row, ROW_DEFAULT_HEIGHT);
+  const height = getStateValue('rowState', row, ROW_DEFAULT_HEIGHT);
   return `
     <div
       class="table__row"
       data-type="resizable"
       data-row="${row}"
+      data-select="row"
       style="height: ${height}${'px'};"
     >
       <div class="table__row-counter">
@@ -26,12 +27,13 @@ function createRow(row, data) {
 }
 
 function createColumn(columnData, index) {
-  const width = getResizableValue('columnState', index, COLUMN_DEFAULT_WIDTH);
+  const width = getStateValue('columnState', index, COLUMN_DEFAULT_WIDTH);
   return `
     <div
       class="table__column"
       data-column="${index}"
       data-type="resizable"
+      data-select="column"
       style="width: ${width}${'px'};"
     >
       ${columnData}
@@ -41,9 +43,9 @@ function createColumn(columnData, index) {
 }
 
 function createCell(column, row) {
-  const width = getResizableValue('columnState', column, COLUMN_DEFAULT_WIDTH);
+  const width = getStateValue('columnState', column, COLUMN_DEFAULT_WIDTH);
   const id = `${row}:${column}`;
-  const data = getContentCell(id);
+  const data = getStateValue('textState', id);
   return `
     <div
       class="table__cell"
