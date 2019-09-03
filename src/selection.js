@@ -30,4 +30,19 @@ export class Selection {
       item.classList.remove(cellClass);
     });
   }
+
+  applyStyles(position) {
+    if (this.selectedItems.length !== 1) {
+      this.selectedItems.forEach((item, i) => {
+        if (i === 0) {
+          return;
+        }
+        item.style.textAlign = position;
+      });
+    } else {
+      this.selectedItems.forEach((item) => {
+        item.style.textAlign = position;
+      });
+    }
+  }
 }

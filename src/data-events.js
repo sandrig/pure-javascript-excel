@@ -15,7 +15,7 @@ export function initListeners() {
   });
 
   document.addEventListener('click', (event) => {
-    const { type, column, select } = event.target.dataset;
+    const { align, type, column, select } = event.target.dataset;
     const el = event.target;
 
     if (select === 'column') {
@@ -30,5 +30,7 @@ export function initListeners() {
       selection.clear();
       selection.add(el);
     }
+
+    selection.applyStyles(align);
   });
 }
