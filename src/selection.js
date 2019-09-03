@@ -8,10 +8,6 @@ export class Selection {
     el.classList.add('table__cell--selected');
   }
 
-  delete(el) {
-    this.selectedItems = this.selectedItems.filter((item) => item === el);
-  }
-
   clear() {
     const columnClass = 'selected';
     const cellClass = 'table__cell--selected';
