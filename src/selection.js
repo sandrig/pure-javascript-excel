@@ -28,23 +28,14 @@ export class Selection {
   }
 
   alignText(position) {
-    if (this.selectedCells.length !== 1) {
-      Object.keys(this.selectedCells).forEach((id, i) => {
-        if (i === 0) {
-          return;
-        }
-        const { row, column } = this.selectedCells[id].dataset;
-        const key = `${row}:${column}`;
-        this.selectedCells[id].style.textAlign = position;
-        saveStateValue('alignTextState', key, position);
-      });
-    } else {
-      Object.keys(this.selectedCells).forEach((id) => {
-        const { row, column } = this.selectedCells[id].dataset;
-        const key = `${row}:${column}`;
-        this.selectedCells[id].style.textAlign = position;
-        saveStateValue('alignTextState', key, position);
-      });
-    }
+    Object.keys(this.selectedCells).forEach((id) => {
+      const { row, column, select } = this.selectedCells[id].dataset;
+      const key = `${row}:${column}`;
+      if (select === 'column') {
+        return;
+      }
+      this.selectedCells[id].style.textAlign = position;
+      saveStateValue('alignTextState', key, position);
+    });
   }
 }
