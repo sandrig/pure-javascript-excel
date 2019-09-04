@@ -1,43 +1,49 @@
+import { saveStateValue } from './state';
+
 export class Selection {
   constructor() {
-    this.selectedItems = [];
+    this.selectedCells = [];
+    this.columnClass = 'selected';
+    this.cellClass = 'table__cell--selected';
   }
 
   add(el) {
-    this.selectedItems.push(el);
-    el.classList.add('table__cell--selected');
+    this.selectedCells.push(el);
+    el.classList.add(this.cellClass);
   }
 
   clear() {
-    const columnClass = 'selected';
-    const cellClass = 'table__cell--selected';
-    this.selectedItems.forEach((item) => {
-      item.classList.remove(columnClass, cellClass);
+    this.selectedCells.forEach((item) => {
+      item.classList.remove(this.columnClass, this.cellClass);
     });
-    this.selectedItems = [];
+    this.selectedCells = [];
   }
 
-  addAll(items) {
-    const columnClass = 'selected';
-    const cellClass = 'table__cell--selected';
-    this.selectedItems = [...items];
-    this.selectedItems.forEach((item) => {
-      item.classList.add(columnClass);
-      item.classList.remove(cellClass);
+  addAll(cells) {
+    this.selectedCells = [...cells];
+    this.selectedCells.forEach((cell) => {
+      cell.classList.add(this.columnClass);
+      cell.classList.remove(this.cellClass);
     });
   }
 
-  applyStyles(position) {
-    if (this.selectedItems.length !== 1) {
-      this.selectedItems.forEach((item, i) => {
+  alignText(position) {
+    if (this.selectedCells.length !== 1) {
+      Object.keys(this.selectedCells).forEach((id, i) => {
         if (i === 0) {
           return;
         }
-        item.style.textAlign = position;
+        const { row, column } = this.selectedCells[id].dataset;
+        const key = `${row}:${column}`;
+        this.selectedCells[id].style.textAlign = position;
+        saveStateValue('alignTextState', key, position);
       });
     } else {
-      this.selectedItems.forEach((item) => {
-        item.style.textAlign = position;
+      Object.keys(this.selectedCells).forEach((id) => {
+        const { row, column } = this.selectedCells[id].dataset;
+        const key = `${row}:${column}`;
+        this.selectedCells[id].style.textAlign = position;
+        saveStateValue('alignTextState', key, position);
       });
     }
   }

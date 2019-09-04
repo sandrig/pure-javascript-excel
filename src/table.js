@@ -1,6 +1,6 @@
 import { initResizing } from './resize';
 import { getStateValue } from './state';
-import { initListeners } from './data-events';
+import { initListeners } from './events';
 
 const COLUMN_DEFAULT_WIDTH = 120;
 const ROW_DEFAULT_HEIGHT = 24;
@@ -46,6 +46,7 @@ function createCell(column, row) {
   const width = getStateValue('columnState', column, COLUMN_DEFAULT_WIDTH);
   const id = `${row}:${column}`;
   const data = getStateValue('textState', id);
+  const position = getStateValue('alignTextState', id);
   return `
     <div
       class="table__cell"
@@ -53,7 +54,7 @@ function createCell(column, row) {
       data-row="${row}"
       data-type="cell"
       contenteditable="true"
-      style="width: ${width}${'px'};"
+      style="width: ${width}${'px'}; text-align: ${position}"
     >${data}</div>
   `;
 }

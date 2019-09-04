@@ -15,15 +15,15 @@ export function initListeners() {
   });
 
   document.addEventListener('click', (event) => {
-    const { align, type, column, select } = event.target.dataset;
+    const { position, type, column, select } = event.target.dataset;
     const el = event.target;
 
     if (select === 'column') {
       selection.clear();
-      const selectedItems = document.querySelectorAll(
+      const selectedCells = document.querySelectorAll(
         `[data-column="${column}"]`,
       );
-      selection.addAll(selectedItems);
+      selection.addAll(selectedCells);
     }
 
     if (type === 'cell') {
@@ -31,6 +31,6 @@ export function initListeners() {
       selection.add(el);
     }
 
-    selection.applyStyles(align);
+    selection.alignText(position);
   });
 }
