@@ -4,9 +4,7 @@ export function initResizing() {
   document.addEventListener('mousedown', (event) => {
     const { resize } = event.target.dataset;
 
-    if (!resize) {
-      return;
-    }
+    if (!resize) return;
 
     const $parent = event.target.closest('[data-type="resizable"]');
     const { offsetWidth, offsetHeight } = $parent;
