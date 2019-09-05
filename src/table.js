@@ -46,12 +46,12 @@ function createCell(column, row) {
   const width = getStateValue('columnState', column, COLUMN_DEFAULT_WIDTH);
   const id = `${row}:${column}`;
   const data = getStateValue('textState', id);
-  const position = getStateValue('alignTextState', id);
+  const position = getStateValue('alignTextState', id) || 'left';
   return `
     <div
       class="table__cell"
       data-column="${column}"
-      data-row="${row}"
+      data-row="${row}" 
       data-type="cell"
       contenteditable="true"
       style="width: ${width}${'px'}; text-align: ${position}"
