@@ -28,12 +28,10 @@ export class Selection {
   }
 
   alignText(position) {
-    Object.keys(this.selectedCells).forEach((id) => {
+    this.selectedCells.forEach((_, id) => {
       const { row, column, select } = this.selectedCells[id].dataset;
       const key = `${row}:${column}`;
-      if (select === 'column') {
-        return;
-      }
+      if (select === 'column') return;
       this.selectedCells[id].style.textAlign = position;
       saveStateValue('alignTextState', key, position);
     });
