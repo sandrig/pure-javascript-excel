@@ -16,6 +16,7 @@ export function initListeners() {
 
   document.addEventListener('click', (event) => {
     const { position, type, column, select } = event.target.dataset;
+    // debugger;
     const el = event.target;
 
     if (select === 'column') {
@@ -30,6 +31,8 @@ export function initListeners() {
       selection.clear();
       selection.add(el);
     }
+
+    if (!position) return;
 
     selection.alignText(position);
   });
