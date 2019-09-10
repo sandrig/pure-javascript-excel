@@ -27,13 +27,15 @@ export class Selection {
     });
   }
 
-  alignText(position) {
-    this.selectedCells.forEach((_, id) => {
-      const { row, column, select } = this.selectedCells[id].dataset;
-      const key = `${row}:${column}`;
-      if (select === 'column') return;
-      this.selectedCells[id].style.textAlign = position;
-      saveStateValue('alignTextState', key, position);
-    });
+  applyStyles(attr, value) {
+    if (attr === 'textAlign') {
+      this.selectedCells.forEach((_, i) => {
+        const { row, column, select } = this.selectedCells[i].dataset;
+        const id = `${row}:${column}`;
+        if (select === 'column') return;
+        this.selectedCells[i].style.textAlign = value;
+        saveStateValue('alignTextState', id, value);
+      });
+    }
   }
 }
