@@ -6,6 +6,7 @@ export function initListeners() {
 
   document.addEventListener('input', (event) => {
     const { type } = event.target.dataset;
+
     if (type === 'cell') {
       const value = event.target.textContent;
       const { row, column } = event.target.dataset;
@@ -15,30 +16,47 @@ export function initListeners() {
   });
 
   document.addEventListener('click', (event) => {
-    const { position, type, column, select } = event.target.dataset;
+    const { position, type } = event.target.dataset;
     const el = event.target;
-    const { select: selectRow, row } = el.parentElement.dataset;
 
-    // const selectedCells1 = document.querySelectorAll('.selected');
-    // console.log(selectedCells1);
-
-    if (select === 'column') {
-      // const selectedCells = document.querySelectorAll(
-      //   `[data-column="${column}"]`,
-      // );
-
-      if (!event.metaKey || !event.ctrlKey) {
-        selection.reset();
-      }
-
+    if (type === 'cell') {
       if (event.metaKey || event.ctrlKey) {
-        console.log(event.metaKey);
-        // selection.addGroup1(selectedCells);
+        selection.add(el);
+      } else {
+        selection.clear();
+        selection.add(el);
       }
-
-      // selection.addGroup1(selectedCells);
     }
 
+    if (!position) return;
+
+    selection.applyStyle({
+      textAlign: position,
+    });
+
+    // const { position, type, column, select } = event.target.dataset;
+    // const el = event.target;
+    // const { select: selectRow, row } = el.parentElement.dataset;
+    //
+    // // const selectedCells1 = document.querySelectorAll('.selected');
+    // // console.log(selectedCells1);
+    //
+    // if (select === 'column') {
+    //   // const selectedCells = document.querySelectorAll(
+    //   //   `[data-column="${column}"]`,
+    //   // );
+    //
+    //   if (!event.metaKey || !event.ctrlKey) {
+    //     selection.reset();
+    //   }
+    //
+    //   if (event.metaKey || event.ctrlKey) {
+    //     console.log(event.metaKey);
+    //     // selection.addGroup1(selectedCells);
+    //   }
+    //
+    //   // selection.addGroup1(selectedCells);
+    // }
     // if (selectRow === 'row') {
     //   const selectedCells = document.querySelectorAll(`[data-row="${row}"]`);
     //   if (!event.metaKey || !event.ctrlKey) {

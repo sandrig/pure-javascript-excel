@@ -5,15 +5,27 @@ export class Selection {
     this.selected = [];
   }
 
-  add() {}
+  add(el) {
+    this.selected.push(el);
+    this.selected.forEach((cell) => {
+      cell.classList.add('selected');
+    });
+  }
 
   group() {}
 
   delete() {}
 
-  clear() {}
+  clear() {
+    this.selected.forEach((item) => {
+      item.classList.remove('selected');
+    });
+    this.selected = [];
+  }
 
-  applyStyles() {}
+  applyStyle(attr) {
+    console.log(attr);
+  }
 }
 
 // export class Selection {
