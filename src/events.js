@@ -1,4 +1,4 @@
-import { saveStateValue } from './state';
+import { saveData } from './store';
 import { Selection } from './selection';
 
 export function initListeners() {
@@ -10,29 +10,62 @@ export function initListeners() {
       const value = event.target.textContent;
       const { row, column } = event.target.dataset;
       const id = `${row}:${column}`;
-      saveStateValue('textState', id, value);
+      saveData('textState', id, value);
     }
   });
 
   document.addEventListener('click', (event) => {
     const { position, type, column, select } = event.target.dataset;
     const el = event.target;
+    const { select: selectRow, row } = el.parentElement.dataset;
+
+    // const selectedCells1 = document.querySelectorAll('.selected');
+    // console.log(selectedCells1);
 
     if (select === 'column') {
-      selection.clear();
-      const selectedCells = document.querySelectorAll(
-        `[data-column="${column}"]`,
-      );
-      selection.addAll(selectedCells);
+      // const selectedCells = document.querySelectorAll(
+      //   `[data-column="${column}"]`,
+      // );
+
+      if (!event.metaKey || !event.ctrlKey) {
+        selection.reset();
+      }
+
+      if (event.metaKey || event.ctrlKey) {
+        console.log(event.metaKey);
+        // selection.addGroup1(selectedCells);
+      }
+
+      // selection.addGroup1(selectedCells);
     }
 
-    if (type === 'cell') {
-      selection.clear();
-      selection.add(el);
-    }
-
-    if (!position) return;
-
-    selection.applyStyles('textAlign', position);
+    // if (selectRow === 'row') {
+    //   const selectedCells = document.querySelectorAll(`[data-row="${row}"]`);
+    //   if (!event.metaKey || !event.ctrlKey) {
+    //     const selectedElements = document.querySelectorAll('.selected');
+    //     selectedElements.forEach((item) => {
+    //       item.classList.remove('selected');
+    //     });
+    //   }
+    //
+    //   if (event.metaKey || event.ctrlKey) {
+    //     selection.addGroup(selectedCells);
+    //   }
+    //
+    //   selection.addGroup(selectedCells);
+    // }
+    //
+    // if (type === 'cell') {
+    //   if (!event.metaKey || !event.ctrlKey) {
+    //     selection.reset();
+    //     selection.cell(el);
+    //   }
+    //
+    //   selection.cell(el);
+    // }
+    //
+    // if (!position) return;
+    //
+    // selection.applyStyles(position);
   });
 }

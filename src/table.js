@@ -1,12 +1,12 @@
 import { initResizing } from './resize';
-import { getStateValue } from './state';
+import { getData } from './store';
 import { initListeners } from './events';
 
 const COLUMN_DEFAULT_WIDTH = 120;
 const ROW_DEFAULT_HEIGHT = 24;
 
 function createRow(row, data) {
-  const height = `${getStateValue('rowState', row, ROW_DEFAULT_HEIGHT)}px`;
+  const height = `${getData('rowState', row, ROW_DEFAULT_HEIGHT)}px`;
   return `
     <div
       class="table__row"
@@ -27,11 +27,7 @@ function createRow(row, data) {
 }
 
 function createColumn(columnData, index) {
-  const width = `${getStateValue(
-    'columnState',
-    index,
-    COLUMN_DEFAULT_WIDTH,
-  )}px`;
+  const width = `${getData('columnState', index, COLUMN_DEFAULT_WIDTH)}px`;
   return `
     <div
       class="table__column"
@@ -47,14 +43,9 @@ function createColumn(columnData, index) {
 }
 
 function createCell(column, row) {
-  const width = `${getStateValue(
-    'columnState',
-    column,
-    COLUMN_DEFAULT_WIDTH,
-  )}px`;
+  const width = `${getData('columnState', column, COLUMN_DEFAULT_WIDTH)}px`;
   const id = `${row}:${column}`;
-  const data = getStateValue('textState', id);
-  const position = getStateValue('alignTextState', id) || 'left';
+  const data = getData('textState', id);
   return `
     <div
       class="table__cell"
@@ -62,7 +53,7 @@ function createCell(column, row) {
       data-row="${row}" 
       data-type="cell"
       contenteditable="true"
-      style="width: ${width}; text-align: ${position}"
+      style="width: ${width};"
     >${data}</div>
   `;
 }
