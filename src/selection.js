@@ -24,7 +24,13 @@ export class Selection {
   }
 
   applyStyle(attr) {
-    console.log(attr);
+    this.selected.forEach((item) => {
+      const { row, column, select } = item.dataset;
+      const id = `${row}:${column}`;
+      if (select === 'column') return;
+      item.style.textAlign = attr.textAlign;
+      saveData('alignState', id, { textAlign: attr.textAlign });
+    });
   }
 }
 
