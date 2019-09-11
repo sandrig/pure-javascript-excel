@@ -46,6 +46,7 @@ function createCell(column, row) {
   const width = `${getData('columnState', column, COLUMN_DEFAULT_WIDTH)}px`;
   const id = `${row}:${column}`;
   const data = getData('textState', id);
+  const css = getData('alignState', id);
   return `
     <div
       class="table__cell"

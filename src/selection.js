@@ -28,8 +28,8 @@ export class Selection {
       const { row, column, select } = item.dataset;
       const id = `${row}:${column}`;
       if (select === 'column') return;
-      item.style.textAlign = attr.textAlign;
-      saveData('alignState', id, { textAlign: attr.textAlign });
+      item.style.textAlign = attr.textAlign; // переписать
+      saveData('styleState', id, { textAlign: attr.textAlign });
     });
   }
 }
