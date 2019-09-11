@@ -1,13 +1,171 @@
 @import '~normalize.css';
 
-// global styles
-@import 'global/base';
+html {
+  box-sizing: border-box;
+}
 
-// blocks styles
-@import 'blocks/title';
-@import 'blocks/header';
-@import 'blocks/field';
-@import 'blocks/controls';
-@import 'blocks/menu';
-@import 'blocks/table';
-@import 'blocks/footer';
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #333333;
+}
+
+.main {
+  flex: 1 0 auto;
+  padding: 0 20px;
+  margin-bottom: 40px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 12px 0;
+  background-color: #178038;
+}
+
+.menu {
+  padding: 0 20px;
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    font-size: 20px;
+  }
+
+  &__link {
+    color: #ffffff;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.title {
+  font-size: 28px;
+}
+
+.field {
+  margin-bottom: 20px;
+}
+
+.controls {
+  margin-bottom: 20px;
+
+  &__button {
+    cursor: pointer;
+
+    * {
+      pointer-events: none;
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    margin-left: 4px;
+  }
+}
+
+.table {
+  max-width: 100%;
+  overflow-x: auto;
+
+  &__row {
+    display: flex;
+    position: relative;
+    min-height: 24px;
+
+    &-counter {
+      min-width: 40px;
+      background-color: #f8f9fa;
+      border: 1px solid #e2e3e3;
+      text-align: center;
+    }
+
+    &-data {
+      display: flex;
+    }
+
+    &-resize {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 4px;
+      cursor: n-resize;
+      width: 40px;
+
+      &:hover {
+        border-bottom: 4px solid #4d90fe;
+      }
+    }
+  }
+
+  &__column {
+    position: relative;
+    min-width: 40px;
+    text-align: center;
+    border: 1px solid #e2e3e3;
+    background-color: #f8f9fa;
+
+    &-resize {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 4px;
+      cursor: e-resize;
+      user-select: none;
+      height: 100%;
+
+      &:hover {
+        border-right: 4px solid #4d90fe;
+      }
+    }
+  }
+
+  &__cell {
+    min-width: 40px;
+    border: 1px solid #e2e3e3;
+    outline: none;
+
+    &:focus {
+      border: 2px solid #1b73e8;
+    }
+  }
+}
+
+.selected {
+  background-color: #e8f0fd;
+}
+
+.footer {
+  flex-shrink: 0;
+  padding: 40px 0;
+  color: #1b1b32;
+  background: #eeeef0;
+  &__copyright {
+    padding: 0 20px;
+    text-align: center;
+  }
+}
