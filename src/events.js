@@ -16,8 +16,32 @@ export function initListeners() {
   });
 
   document.addEventListener('click', (event) => {
-    const { position, type } = event.target.dataset;
     const el = event.target;
+    const { position, type, column, select } = event.target.dataset;
+    const { select: selectRow, row } = el.parentElement.dataset;
+
+    if (select === 'column') {
+      const selectedCells = document.querySelectorAll(
+        `[data-column="${column}"]`,
+      );
+
+      if (event.metaKey || event.ctrlKey) {
+        selection.group(selectedCells);
+      } else {
+        selection.clear();
+        selection.group(selectedCells);
+      }
+    }
+
+    if (selectRow === 'row') {
+      const selectedCells = document.querySelectorAll(`[data-row="${row}"]`);
+      if (event.metaKey || event.ctrlKey) {
+        selection.group(selectedCells);
+      } else {
+        selection.clear();
+        selection.group(selectedCells);
+      }
+    }
 
     if (type === 'cell') {
       if (event.metaKey || event.ctrlKey) {
@@ -31,59 +55,8 @@ export function initListeners() {
     if (!position) return;
 
     selection.applyStyle({
-      textAlign: position,
+      key: 'text-align',
+      value: position,
     });
-
-    // const { position, type, column, select } = event.target.dataset;
-    // const el = event.target;
-    // const { select: selectRow, row } = el.parentElement.dataset;
-    //
-    // // const selectedCells1 = document.querySelectorAll('.selected');
-    // // console.log(selectedCells1);
-    //
-    // if (select === 'column') {
-    //   // const selectedCells = document.querySelectorAll(
-    //   //   `[data-column="${column}"]`,
-    //   // );
-    //
-    //   if (!event.metaKey || !event.ctrlKey) {
-    //     selection.reset();
-    //   }
-    //
-    //   if (event.metaKey || event.ctrlKey) {
-    //     console.log(event.metaKey);
-    //     // selection.addGroup1(selectedCells);
-    //   }
-    //
-    //   // selection.addGroup1(selectedCells);
-    // }
-    // if (selectRow === 'row') {
-    //   const selectedCells = document.querySelectorAll(`[data-row="${row}"]`);
-    //   if (!event.metaKey || !event.ctrlKey) {
-    //     const selectedElements = document.querySelectorAll('.selected');
-    //     selectedElements.forEach((item) => {
-    //       item.classList.remove('selected');
-    //     });
-    //   }
-    //
-    //   if (event.metaKey || event.ctrlKey) {
-    //     selection.addGroup(selectedCells);
-    //   }
-    //
-    //   selection.addGroup(selectedCells);
-    // }
-    //
-    // if (type === 'cell') {
-    //   if (!event.metaKey || !event.ctrlKey) {
-    //     selection.reset();
-    //     selection.cell(el);
-    //   }
-    //
-    //   selection.cell(el);
-    // }
-    //
-    // if (!position) return;
-    //
-    // selection.applyStyles(position);
   });
 }
