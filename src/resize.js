@@ -11,7 +11,7 @@ export function initResizing() {
     const columnId = $parent.dataset.column;
     const rowId = $parent.dataset.row;
     const selector = `[data-column="${columnId}"]`;
-    const columns = Array.from(document.querySelectorAll(selector));
+    const columns = document.querySelectorAll(selector);
 
     document.onmousemove = (e) => {
       if (resize === 'column') {
