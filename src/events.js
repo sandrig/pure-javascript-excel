@@ -17,38 +17,42 @@ export function initListeners() {
 
   document.addEventListener('click', (event) => {
     const el = event.target;
-    const { position, type, column, select } = event.target.dataset;
-    const { select: selectRow, row } = el.parentElement.dataset;
-
-    if (select === 'column') {
-      const selectedCells = document.querySelectorAll(
-        `[data-column="${column}"]`,
-      );
-
+    const { position, type, column, row, select } = el.dataset;
+    const { select: selectRow, row: rowId } = el.parentElement.dataset;
+    const id = `${row}:${column}`;
+    const checkSelection = (target) => {
       if (event.metaKey || event.ctrlKey) {
-        selection.group(selectedCells);
+        selection.group(target);
       } else {
         selection.clear();
-        selection.group(selectedCells);
+        selection.group(target);
       }
+    };
+
+    if (select === 'column') {
+      const getAllColumnCells = document.querySelectorAll(
+        `[data-column="${column}"]`,
+      );
+      const selectedColumnCells = [...getAllColumnCells].map((cell) => ({
+        el: cell,
+      }));
+      checkSelection(selectedColumnCells);
     }
 
     if (selectRow === 'row') {
-      const selectedCells = document.querySelectorAll(`[data-row="${row}"]`);
-      if (event.metaKey || event.ctrlKey) {
-        selection.group(selectedCells);
-      } else {
-        selection.clear();
-        selection.group(selectedCells);
-      }
+      const getAllRowCells = document.querySelectorAll(`[data-row="${rowId}"]`);
+      const selectedRowCells = [...getAllRowCells].map((cell) => ({
+        el: cell,
+      }));
+      checkSelection(selectedRowCells);
     }
 
     if (type === 'cell') {
       if (event.metaKey || event.ctrlKey) {
-        selection.add(el);
+        selection.add(id, el);
       } else {
         selection.clear();
-        selection.add(el);
+        selection.add(id, el);
       }
     }
 
