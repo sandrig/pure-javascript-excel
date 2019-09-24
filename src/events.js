@@ -30,18 +30,18 @@ export function initListeners() {
     };
 
     if (select === 'column') {
-      const getAllColumnCells = document.querySelectorAll(
+      const columnCells = document.querySelectorAll(
         `[data-column="${column}"]`,
       );
-      const selectedColumnCells = [...getAllColumnCells].map((cell) => ({
+      const selectedColumnCells = [...columnCells].map((cell) => ({
         el: cell,
       }));
       checkSelection(selectedColumnCells);
     }
 
     if (selectRow === 'row') {
-      const getAllRowCells = document.querySelectorAll(`[data-row="${rowId}"]`);
-      const selectedRowCells = [...getAllRowCells].map((cell) => ({
+      const rowCells = document.querySelectorAll(`[data-row="${rowId}"]`);
+      const selectedRowCells = [...rowCells].map((cell) => ({
         el: cell,
       }));
       checkSelection(selectedRowCells);
