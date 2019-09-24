@@ -18,9 +18,7 @@ export function initResizing() {
         const delta = Math.floor(e.pageX - event.pageX);
         const width = offsetWidth + delta;
         columns.forEach((cell) => {
-          const el = cell;
-          el.style.width = `${width}px`;
-          return el;
+          cell.style.width = `${width}px`;
         });
         saveData('columnState', columnId, width);
       } else if (resize === 'row') {
