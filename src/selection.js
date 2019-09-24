@@ -15,6 +15,7 @@ export class Selection {
       this.selectedCells.push({ id, el });
     } else {
       this.delete(id);
+      el.classList.remove('selected');
     }
   }
 
@@ -26,14 +27,10 @@ export class Selection {
   }
 
   delete(id) {
-    this.selectedCells = this.selectedCells
-      .map((cell) => {
-        if (cell.id === id) {
-          cell.el.classList.remove('selected');
-        }
-        return cell;
-      })
-      .filter((cell) => cell.id !== id);
+    const foundCell = this.selectedCells.find((cell) => cell.id === id);
+    this.selectedCells = this.selectedCells.filter(
+      (cell) => cell.id !== foundCell.id,
+    );
   }
 
   clear() {
