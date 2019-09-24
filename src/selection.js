@@ -6,7 +6,7 @@ export class Selection {
   }
 
   add(id, el) {
-    const isSelectedCell = this.selectedCells.some((cell) => cell.id === id);
+    const isSelectedCell = this.selectedCells.find((cell) => cell.id === id);
     if (this.selectedCells.length === 0) {
       el.classList.add('selected');
       this.selectedCells.push({ id, el });
@@ -19,7 +19,7 @@ export class Selection {
   }
 
   group(cells) {
-    this.selectedCells = [...this.selectedCells, ...cells];
+    this.selectedCells = this.selectedCells.concat(cells);
     this.selectedCells.forEach((cell) => {
       cell.el.classList.add('selected');
     });
