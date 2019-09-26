@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title><%= htmlWebpackPlugin.options.title %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="assets/static/favicon.ico" type="image/x-icon" />
   </head>
 
   <body>
@@ -24,6 +25,35 @@
           Формула
           <input id="formula" type="text" class="field__input" />
         </label>
+      </div>
+      <div class="controls" data-type="controls">
+        <button data-position="left" class="controls__button" type="button">
+          <img
+            width="20px"
+            height="20px"
+            src="<%- require('./assets/images/align-left.svg') %>"
+            alt="Align to left"
+            title="Align to left"
+          />
+        </button>
+        <button data-position="center" class="controls__button" type="button">
+          <img
+            width="20px"
+            height="20px"
+            src="<%- require('./assets/images/align-center.svg') %>"
+            alt="Align to center"
+            title="Align to center"
+          />
+        </button>
+        <button data-position="right" class="controls__button" type="button">
+          <img
+            width="20px"
+            height="20px"
+            src="<%- require('./assets/images/align-right.svg') %>"
+            alt="Align to right"
+            title="Align to right"
+          />
+        </button>
       </div>
       <div class="table" id="table"></div>
     </main>

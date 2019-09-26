@@ -1,18 +1,19 @@
 import { initResizing } from './resize';
-import { getContentCell, getResizableValue } from './state';
-import { initListeners } from './data-events';
+import { getData } from './store';
+import { initListeners } from './events';
 
 const COLUMN_DEFAULT_WIDTH = 120;
 const ROW_DEFAULT_HEIGHT = 24;
 
 function createRow(row, data) {
-  const height = getResizableValue('rowState', row, ROW_DEFAULT_HEIGHT);
+  const height = `${getData('rowState', row, ROW_DEFAULT_HEIGHT)}px`;
   return `
     <div
       class="table__row"
-      data-type="resizible"
+      data-type="resizable"
       data-row="${row}"
-      style="height: ${height}${'px'};"
+      data-select="row"
+      style="height: ${height};"
     >
       <div class="table__row-counter">
         ${row || ''}
@@ -26,13 +27,14 @@ function createRow(row, data) {
 }
 
 function createColumn(columnData, index) {
-  const width = getResizableValue('columnState', index, COLUMN_DEFAULT_WIDTH);
+  const width = `${getData('columnState', index, COLUMN_DEFAULT_WIDTH)}px`;
   return `
     <div
       class="table__column"
       data-column="${index}"
-      data-type="resizible"
-      style="width: ${width}${'px'};"
+      data-type="resizable"
+      data-select="column"
+      style="width: ${width};"
     >
       ${columnData}
       <div class="table__column-resize" data-resize="column"></div>
@@ -41,17 +43,21 @@ function createColumn(columnData, index) {
 }
 
 function createCell(column, row) {
-  const width = getResizableValue('columnState', column, COLUMN_DEFAULT_WIDTH);
+  const width = `${getData('columnState', column, COLUMN_DEFAULT_WIDTH)}px`;
   const id = `${row}:${column}`;
-  const data = getContentCell(id);
+  const data = getData('textState', id);
+  const cssState = getData('styleState', id);
+  const styles = Object.keys(cssState).map(
+    (key) => `${[key]}: ${cssState[key]};`,
+  );
   return `
     <div
       class="table__cell"
       data-column="${column}"
-      data-row="${row}"
+      data-row="${row}" 
       data-type="cell"
       contenteditable="true"
-      style="width: ${width}${'px'};"
+      style="width: ${width}; ${styles}"
     >${data}</div>
   `;
 }
