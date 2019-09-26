@@ -7,10 +7,7 @@ export class Selection {
 
   add(id, el) {
     const isSelectedCell = this.selectedCells.find((cell) => cell.id === id);
-    if (this.selectedCells.length === 0) {
-      el.classList.add('selected');
-      this.selectedCells.push({ id, el });
-    } else if (!isSelectedCell) {
+    if (!isSelectedCell) {
       el.classList.add('selected');
       this.selectedCells.push({ id, el });
     } else {
@@ -40,15 +37,20 @@ export class Selection {
     this.selectedCells = [];
   }
 
-  applyStyle({ key, value }) {
+  applyStyle(obj) {
     this.selectedCells.forEach((cell) => {
       const { row, column, select } = cell.el.dataset;
       const id = `${row}:${column}`;
       if (select === 'column') return;
-      cell.el.style[key] = value;
-      saveData('styleState', id, {
-        key,
-        value,
+      Object.keys(obj).forEach((key) => {
+        const formatKey = key
+          .split(/(?=[A-Z])/)
+          .join('-')
+          .toLowerCase();
+        cell.el.style[key] = obj[key];
+        saveData('styleState', id, {
+          [formatKey]: obj[key],
+        });
       });
     });
   }

@@ -46,8 +46,10 @@ function createCell(column, row) {
   const width = `${getData('columnState', column, COLUMN_DEFAULT_WIDTH)}px`;
   const id = `${row}:${column}`;
   const data = getData('textState', id);
-  const cssData = [getData('styleState', id)];
-  const styles = cssData.map((item) => `${item.key}:${item.value}`);
+  const cssState = getData('styleState', id);
+  const styles = Object.keys(cssState).map(
+    (key) => `${[key]}: ${cssState[key]};`,
+  );
   return `
     <div
       class="table__cell"
@@ -55,7 +57,7 @@ function createCell(column, row) {
       data-row="${row}" 
       data-type="cell"
       contenteditable="true"
-      style="width: ${width}; ${styles};"
+      style="width: ${width}; ${styles}"
     >${data}</div>
   `;
 }

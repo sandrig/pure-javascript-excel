@@ -29,22 +29,19 @@ export function initListeners() {
       }
     };
 
+    const transformEl = (groupCells) =>
+      Array.from(groupCells).map((cell) => ({ el: cell }));
+
     if (select === 'column') {
       const columnCells = document.querySelectorAll(
         `[data-column="${column}"]`,
       );
-      const selectedColumnCells = [...columnCells].map((cell) => ({
-        el: cell,
-      }));
-      checkSelection(selectedColumnCells);
+      checkSelection(transformEl(columnCells));
     }
 
     if (selectRow === 'row') {
       const rowCells = document.querySelectorAll(`[data-row="${rowId}"]`);
-      const selectedRowCells = [...rowCells].map((cell) => ({
-        el: cell,
-      }));
-      checkSelection(selectedRowCells);
+      checkSelection(transformEl(rowCells));
     }
 
     if (type === 'cell') {
@@ -58,9 +55,6 @@ export function initListeners() {
 
     if (!position) return;
 
-    selection.applyStyle({
-      key: 'text-align',
-      value: position,
-    });
+    selection.applyStyle({ textAlign: position });
   });
 }
